@@ -10,13 +10,13 @@ public class Pawn {
     private String color;
     private char representation;
 
-    public Pawn(String color) {
+    public Pawn(String color, char representation) {
         this.color = color;
-        this.representation = color.equals(WHITE_COLOR) ? 'p' : 'P';
+        this.representation = representation;
     }
 
     public Pawn() {
-        this(WHITE_COLOR);
+        this(WHITE_COLOR, WHITE_REPRESENTATION);
     }
 
     public String getColor() {

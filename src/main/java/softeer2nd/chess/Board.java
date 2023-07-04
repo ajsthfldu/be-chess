@@ -2,49 +2,33 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Pawn;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static softeer2nd.chess.pieces.Pawn.BLACK_COLOR;
-import static softeer2nd.chess.pieces.Pawn.WHITE_COLOR;
+import static softeer2nd.chess.pieces.Pawn.*;
 
 public class Board {
 
-    List<List<Pawn>> pawnList;
-//    public void add(Pawn pawn) {
-//        pawnList.add(pawn);
-//    }
-//
-//    public int size() {
-//        return pawnList.size();
-//    }
-//
-//    public Pawn findPawn(int i) {
-//        return pawnList.get(i);
-//    }
+    Pawn[][] pawn2d = new Pawn[8][8];
 
     public void initialize() {
-        pawnList = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            List<Pawn> nullList = new ArrayList<>();
             for (int j = 0; j < 8; j++) {
-                nullList.add(null);
+                if (i == 1) {
+                    pawn2d[i][j] = new Pawn(BLACK_COLOR, BLACK_REPRESENTATION);
+                } else if (i == 6) {
+                    pawn2d[i][j] = new Pawn(WHITE_COLOR, WHITE_REPRESENTATION);
+                } else {
+                    pawn2d[i][j] = null;
+                }
             }
-            pawnList.add(nullList);
-        }
-        for (int i = 0; i < 8; i++) {
-            pawnList.get(1).set(i, new Pawn(BLACK_COLOR));
-        }
-        for (int i = 0; i < 8; i++) {
-            pawnList.get(6).set(i, new Pawn(WHITE_COLOR));
         }
     }
 
     public String getWhitePawnsResult() {
         StringBuilder sb = new StringBuilder();
-        for (List<Pawn> pawns : pawnList) {
+        for (Pawn[] pawns : pawn2d) {
             for (Pawn pawn : pawns) {
-                if (pawn != null && pawn.getColor().equals(WHITE_COLOR)) {
+                if (pawn != null && WHITE_COLOR.equals(pawn.getColor())) {
                     sb.append(pawn.getRepresentation());
                 }
             }
@@ -54,9 +38,9 @@ public class Board {
 
     public String getBlackPawnsResult() {
         StringBuilder sb = new StringBuilder();
-        for (List<Pawn> pawns : pawnList) {
+        for (Pawn[] pawns : pawn2d) {
             for (Pawn pawn : pawns) {
-                if (pawn != null && pawn.getColor().equals(BLACK_COLOR)) {
+                if (pawn != null && BLACK_COLOR.equals(pawn.getColor())) {
                     sb.append(pawn.getRepresentation());
                 }
             }
@@ -66,7 +50,7 @@ public class Board {
 
     public String print() {
         StringBuilder sb = new StringBuilder();
-        for (List<Pawn> pawns : pawnList) {
+        for (Pawn[] pawns : pawn2d) {
             for (Pawn pawn : pawns) {
                 if (pawn == null) {
                     sb.append('.');

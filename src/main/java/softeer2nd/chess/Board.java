@@ -1,23 +1,23 @@
 package softeer2nd.chess;
 
-import softeer2nd.chess.pieces.Pawn;
+import softeer2nd.chess.pieces.Piece;
 
 
-import static softeer2nd.chess.pieces.Pawn.*;
+import static softeer2nd.chess.pieces.Piece.*;
 
 public class Board {
 
-    Pawn[][] pawn2d = new Pawn[8][8];
+    Piece[][] piece2D = new Piece[8][8];
 
     public void initialize() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (i == 1) {
-                    pawn2d[i][j] = new Pawn(BLACK_COLOR, BLACK_REPRESENTATION);
+                    piece2D[i][j] = new Piece(BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
                 } else if (i == 6) {
-                    pawn2d[i][j] = new Pawn(WHITE_COLOR, WHITE_REPRESENTATION);
+                    piece2D[i][j] = new Piece(WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
                 } else {
-                    pawn2d[i][j] = new Pawn(EMPTY_COLOR, EMPTY_REPRESENTATION);
+                    piece2D[i][j] = new Piece(EMPTY_COLOR, EMPTY_REPRESENTATION);
                 }
             }
         }
@@ -37,11 +37,11 @@ public class Board {
 
     private String getResultByColors(String[] colors, boolean newLine) {
         StringBuilder sb = new StringBuilder();
-        for (Pawn[] pawns : pawn2d) {
-            for (Pawn pawn : pawns) {
+        for (Piece[] pieces : piece2D) {
+            for (Piece piece : pieces) {
                 for (String color : colors) {
-                    if (color.equals(pawn.getColor())) {
-                        sb.append(pawn.getRepresentation());
+                    if (color.equals(piece.getColor())) {
+                        sb.append(piece.getRepresentation());
                     }
                 }
             }

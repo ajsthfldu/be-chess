@@ -32,6 +32,8 @@ public class PieceTest {
     private void verifyPiece(final Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor());
         assertEquals(representation, piece.getRepresentation());
+        assertEquals(color.equals(WHITE_COLOR), piece.isWhite());
+        assertEquals(color.equals(BLACK_COLOR), piece.isBlack());
     }
 }
 

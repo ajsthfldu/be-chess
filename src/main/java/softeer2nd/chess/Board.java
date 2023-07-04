@@ -24,32 +24,30 @@ public class Board {
     }
 
     public String getWhitePawnsResult() {
-        return getResultByColor(WHITE_COLOR);
+        return getResultByColors(new String[]{WHITE_COLOR}, false);
     }
 
     public String getBlackPawnsResult() {
-        return getResultByColor(BLACK_COLOR);
-    }
-
-    private String getResultByColor(String color) {
-        StringBuilder sb = new StringBuilder();
-        for (Pawn[] pawns : pawn2d) {
-            for (Pawn pawn : pawns) {
-                if (color.equals(pawn.getColor())) {
-                    sb.append(pawn.getRepresentation());
-                }
-            }
-        }
-        return sb.toString();
+        return getResultByColors(new String[]{BLACK_COLOR}, false);
     }
 
     public String print() {
+        return getResultByColors(new String[]{EMPTY_COLOR, WHITE_COLOR, BLACK_COLOR}, true);
+    }
+
+    private String getResultByColors(String[] colors, boolean newLine) {
         StringBuilder sb = new StringBuilder();
         for (Pawn[] pawns : pawn2d) {
             for (Pawn pawn : pawns) {
-                sb.append(pawn.getRepresentation());
+                for (String color : colors) {
+                    if (color.equals(pawn.getColor())) {
+                        sb.append(pawn.getRepresentation());
+                    }
+                }
             }
-            sb.append('\n');
+            if (newLine) {
+                sb.append('\n');
+            }
         }
         return sb.toString();
     }

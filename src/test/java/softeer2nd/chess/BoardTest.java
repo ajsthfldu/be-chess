@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static softeer2nd.utils.StringUtils.appendNewLine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,15 +10,21 @@ public class BoardTest {
     Board board;
 
     @BeforeEach
-    public void createBoard() {
+    public void setup() {
         board = new Board();
     }
 
     @Test
-    public void initialize() throws Exception {
+    public void create() throws Exception {
         board.initialize();
-        System.out.println(board.print());
-        assertEquals("pppppppp", board.getWhitePawnsResult());
-        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+        assertEquals(32, board.pieceCount());
+        String blankRank = appendNewLine("........");
+        assertEquals(
+                appendNewLine("RNBQKBNR") +
+                        appendNewLine("PPPPPPPP") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr"),
+                board.showBoard());
     }
 }

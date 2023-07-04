@@ -5,21 +5,31 @@ public class Piece {
     public static final String BLACK_COLOR = "black";
     public static final String WHITE_COLOR = "white";
     public static final String EMPTY_COLOR = "empty";
+
     public static final char EMPTY_REPRESENTATION = '.';
+
     public static final char WHITE_PAWN_REPRESENTATION = 'p';
     public static final char BLACK_PAWN_REPRESENTATION = 'P';
-    private static final char WHITE_KNIGHT_REPRESENTATION = 'n';
-    private static final char BLACK_KNIGHT_REPRESENTATION = 'N';
-    private static final char WHITE_ROOK_REPRESENTATION = 'r';
-    private static final char BLACK_ROOK_REPRESENTATION = 'R';
-    private static final char WHITE_BISHOP_REPRESENTATION = 'b';
-    private static final char BLACK_BISHOP_REPRESENTATION = 'B';
-    private static final char WHITE_QUEEN_REPRESENTATION = 'q';
-    private static final char BLACK_QUEEN_REPRESENTATION = 'Q';
-    private static final char WHITE_KING_REPRESENTATION = 'k';
-    private static final char BLACK_KING_REPRESENTATION = 'K';
+
+    public static final char WHITE_KNIGHT_REPRESENTATION = 'n';
+    public static final char BLACK_KNIGHT_REPRESENTATION = 'N';
+
+    public static final char WHITE_ROOK_REPRESENTATION = 'r';
+    public static final char BLACK_ROOK_REPRESENTATION = 'R';
+
+    public static final char WHITE_BISHOP_REPRESENTATION = 'b';
+    public static final char BLACK_BISHOP_REPRESENTATION = 'B';
+
+    public static final char WHITE_QUEEN_REPRESENTATION = 'q';
+    public static final char BLACK_QUEEN_REPRESENTATION = 'Q';
+
+    public static final char WHITE_KING_REPRESENTATION = 'k';
+    public static final char BLACK_KING_REPRESENTATION = 'K';
 
 
+    public static Piece createMockPiece() {
+        return new Piece(EMPTY_COLOR, "empty", EMPTY_REPRESENTATION);
+    }
     public static Piece createWhitePawn() {
         return new Piece(WHITE_COLOR, "pawn", WHITE_PAWN_REPRESENTATION);
     }

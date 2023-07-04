@@ -4,6 +4,7 @@ import softeer2nd.chess.pieces.Piece;
 
 
 import static softeer2nd.chess.pieces.Piece.*;
+import static softeer2nd.utils.StringUtils.NEWLINE;
 
 public class Board {
 
@@ -13,25 +14,41 @@ public class Board {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (i == 1) {
-                    piece2D[i][j] = new Piece(BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
+                    piece2D[i][j] = createBlackPawn();
                 } else if (i == 6) {
-                    piece2D[i][j] = new Piece(WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
+                    piece2D[i][j] = createWhitePawn();
+                } else if (i == 0) {
+                    if (j == 0 || j == 7) {
+                        piece2D[i][j] = createBlackRook();
+                    } else if (j == 1 || j == 6) {
+                        piece2D[i][j] = createBlackKnight();
+                    } else if (j == 2 || j == 5) {
+                        piece2D[i][j] = createBlackBishop();
+                    } else if (j == 3) {
+                        piece2D[i][j] = createBlackQueen();
+                    } else {
+                        piece2D[i][j] = createBlackKing();
+                    }
+                } else if (i == 7) {
+                    if (j == 0 || j == 7) {
+                        piece2D[i][j] = createWhiteRook();
+                    } else if (j == 1 || j == 6) {
+                        piece2D[i][j] = createWhiteKnight();
+                    } else if (j == 2 || j == 5) {
+                        piece2D[i][j] = createWhiteBishop();
+                    } else if (j == 3) {
+                        piece2D[i][j] = createWhiteQueen();
+                    } else {
+                        piece2D[i][j] = createWhiteKing();
+                    }
                 } else {
-                    piece2D[i][j] = new Piece(EMPTY_COLOR, EMPTY_REPRESENTATION);
+                    piece2D[i][j] = createMockPiece();
                 }
             }
         }
     }
 
-    public String getWhitePawnsResult() {
-        return getResultByColors(new String[]{WHITE_COLOR}, false);
-    }
-
-    public String getBlackPawnsResult() {
-        return getResultByColors(new String[]{BLACK_COLOR}, false);
-    }
-
-    public String print() {
+    public String showBoard() {
         return getResultByColors(new String[]{EMPTY_COLOR, WHITE_COLOR, BLACK_COLOR}, true);
     }
 
@@ -46,9 +63,21 @@ public class Board {
                 }
             }
             if (newLine) {
-                sb.append('\n');
+                sb.append(NEWLINE);
             }
         }
         return sb.toString();
+    }
+
+    public int pieceCount() {
+        int count = 0;
+        for (Piece[] pieces : piece2D) {
+            for (Piece piece : pieces) {
+                if (!"empty".equals(piece.getName())) {
+                    ++count;
+                }
+            }
+        }
+        return count;
     }
 }

@@ -14,7 +14,7 @@ public class Main {
             if ("start".equals(input)) {
                 System.out.println("게임을 시작합니다.");
                 board.initialize();
-                System.out.println(board.print());
+                System.out.println(board.showBoard());
             }
             if ("end".equals(input)) {
                 System.out.println("게임을 종료합니다.");

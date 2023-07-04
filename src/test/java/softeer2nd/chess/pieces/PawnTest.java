@@ -16,8 +16,8 @@ public class PawnTest {
 
     @Test
     public void create() {
-        verifyPawn(Pawn.WHITE_COLOR, WHITE_REPRESENTATION);
-        verifyPawn(Pawn.BLACK_COLOR, BLACK_REPRESENTATION);
+        verifyPawn(WHITE_COLOR, WHITE_REPRESENTATION);
+        verifyPawn(BLACK_COLOR, BLACK_REPRESENTATION);
         verifyPawn(EMPTY_COLOR, EMPTY_REPRESENTATION);
     }
 

@@ -16,24 +16,25 @@ public class BoardTest {
     public void createBoard() {
         board = new Board();
     }
-    @Test
-    @DisplayName("폰이 추가되면 보드 사이즈가 증가해야 한다")
-    public void create() throws Exception {
-        addPawnWithColor(WHITE_COLOR, 1);
-        addPawnWithColor(BLACK_COLOR, 2);
-    }
-
-    public void addPawnWithColor (String color, int size) {
-        Pawn pawn = new Pawn(color);
-        board.add(pawn);
-        assertEquals(size, board.size());
-        assertEquals(pawn, board.findPawn(size - 1));
-    }
-
 //    @Test
-//    public void onlyPawn() {
-//        Board board = new Board();
-//
-//        board.add(new Integer("7"));
+//    @DisplayName("폰이 추가되면 보드 사이즈가 증가해야 한다")
+//    public void create() throws Exception {
+//        addPawnWithColor(WHITE_COLOR, 1);
+//        addPawnWithColor(BLACK_COLOR, 2);
 //    }
+//
+//    public void addPawnWithColor (String color, int size) {
+//        Pawn pawn = new Pawn(color);
+//        board.add(pawn);
+//        assertEquals(size, board.size());
+//        assertEquals(pawn, board.findPawn(size - 1));
+//    }
+
+    @Test
+    public void initialize() throws Exception {
+        board.initialize();
+        System.out.println(board.print());
+        assertEquals("pppppppp", board.getWhitePawnsResult());
+        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+    }
 }

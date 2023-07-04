@@ -29,4 +29,11 @@ public class BoardTest {
         assertEquals(size, board.size());
         assertEquals(pawn, board.findPawn(size - 1));
     }
+
+//    @Test
+//    public void onlyPawn() {
+//        Board board = new Board();
+//
+//        board.add(new Integer("7"));
+//    }
 }

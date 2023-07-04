@@ -10,14 +10,15 @@ public class PawnTest {
     @Test
     public void create_기본생성자() throws Exception {
         Pawn pawn = new Pawn();
-        assertEquals(Pawn.WHITE_COLOR, pawn.getColor());
-        assertEquals(Pawn.WHITE_REPRESENTATION, pawn.getRepresentation());
+        assertEquals(WHITE_COLOR, pawn.getColor());
+        assertEquals(WHITE_REPRESENTATION, pawn.getRepresentation());
     }
 
     @Test
     public void create() {
-        verifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
-        verifyPawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
+        verifyPawn(Pawn.WHITE_COLOR, WHITE_REPRESENTATION);
+        verifyPawn(Pawn.BLACK_COLOR, BLACK_REPRESENTATION);
+        verifyPawn(EMPTY_COLOR, EMPTY_REPRESENTATION);
     }
 
     void verifyPawn(final String color, final char representation) {

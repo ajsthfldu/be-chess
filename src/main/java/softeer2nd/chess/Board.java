@@ -2,7 +2,6 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Pawn;
 
-import java.util.List;
 
 import static softeer2nd.chess.pieces.Pawn.*;
 
@@ -18,29 +17,25 @@ public class Board {
                 } else if (i == 6) {
                     pawn2d[i][j] = new Pawn(WHITE_COLOR, WHITE_REPRESENTATION);
                 } else {
-                    pawn2d[i][j] = null;
+                    pawn2d[i][j] = new Pawn(EMPTY_COLOR, EMPTY_REPRESENTATION);
                 }
             }
         }
     }
 
     public String getWhitePawnsResult() {
-        StringBuilder sb = new StringBuilder();
-        for (Pawn[] pawns : pawn2d) {
-            for (Pawn pawn : pawns) {
-                if (pawn != null && WHITE_COLOR.equals(pawn.getColor())) {
-                    sb.append(pawn.getRepresentation());
-                }
-            }
-        }
-        return sb.toString();
+        return getResultByColor(WHITE_COLOR);
     }
 
     public String getBlackPawnsResult() {
+        return getResultByColor(BLACK_COLOR);
+    }
+
+    private String getResultByColor(String color) {
         StringBuilder sb = new StringBuilder();
         for (Pawn[] pawns : pawn2d) {
             for (Pawn pawn : pawns) {
-                if (pawn != null && BLACK_COLOR.equals(pawn.getColor())) {
+                if (color.equals(pawn.getColor())) {
                     sb.append(pawn.getRepresentation());
                 }
             }
@@ -52,13 +47,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (Pawn[] pawns : pawn2d) {
             for (Pawn pawn : pawns) {
-                if (pawn == null) {
-                    sb.append('.');
-                } else if (WHITE_COLOR.equals(pawn.getColor())) {
-                    sb.append(pawn.getRepresentation());
-                } else {
-                    sb.append(pawn.getRepresentation());
-                }
+                sb.append(pawn.getRepresentation());
             }
             sb.append('\n');
         }

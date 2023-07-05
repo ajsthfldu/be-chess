@@ -18,11 +18,11 @@ public class Piece {
         NO_PIECE('.', 0.0);
 
         private final char representation;
-        private final double defaultScore;
+        private final double defaultPoint;
 
         Type(char representation, double defaultScore) {
             this.representation = representation;
-            this.defaultScore = defaultScore;
+            this.defaultPoint = defaultScore;
         }
 
         public char getWhiteRepresentation() {
@@ -33,8 +33,8 @@ public class Piece {
             return Character.toUpperCase(representation);
         }
 
-        public double getDefaultScore() {
-            return defaultScore;
+        public double getDefaultPoint() {
+            return defaultPoint;
         }
     }
 

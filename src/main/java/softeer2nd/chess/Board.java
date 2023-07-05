@@ -4,9 +4,7 @@ import softeer2nd.chess.pieces.Piece;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.chess.pieces.Piece.createWhiteBishop;
@@ -117,7 +115,7 @@ public class Board {
         for (Rank rank : ranks) {
             for (Piece piece : rank.pieces) {
                 if (piece.getColor() == color) {
-                    score += piece.getType().getDefaultScore();
+                    score += piece.getType().getDefaultPoint();
                 }
             }
         }

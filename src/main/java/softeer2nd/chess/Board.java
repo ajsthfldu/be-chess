@@ -90,6 +90,12 @@ public class Board {
         }
         return count;
     }
+
+    public Piece findPiece(String s) {
+        int x = s.charAt(0) - 'a';
+        int y = 8 - (s.charAt(1) - '0');
+        return ranks.get(y).pieces.get(x);
+    }
 }
 
 class Rank {

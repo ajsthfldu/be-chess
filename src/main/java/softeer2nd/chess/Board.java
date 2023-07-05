@@ -91,10 +91,29 @@ public class Board {
         return count;
     }
 
-    public Piece findPiece(String s) {
-        int x = s.charAt(0) - 'a';
-        int y = 8 - (s.charAt(1) - '0');
-        return ranks.get(y).pieces.get(x);
+    public Piece findPiece(String position) {
+        int[] xy = findPosition(position);
+        return ranks.get(xy[0]).pieces.get(xy[1]);
+    }
+
+    public void initializeEmpty() {
+        for (int i = 0; i < 8; i++) {
+            ranks.add(new Rank());
+            for (int j = 0; j < 8; j++) {
+                ranks.get(i).pieces.add(createBlank());
+            }
+        }
+    }
+
+    public void move(String position, Piece piece) {
+        int[] xy = findPosition(position);
+        ranks.get(xy[0]).pieces.set(xy[1], piece);
+    }
+
+    public int[] findPosition(String position) {
+        int x = 8 - (position.charAt(1) - '0');
+        int y = position.charAt(0) - 'a';
+        return new int[]{x, y};
     }
 }
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class BoardTest {
@@ -15,6 +16,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("보드는 체스규칙에 따라 초기화해야 한다")
     public void create() throws Exception {
         board.initialize();
         assertEquals(32, board.pieceCount());

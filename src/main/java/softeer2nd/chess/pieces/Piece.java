@@ -1,5 +1,7 @@
 package softeer2nd.chess.pieces;
 
+import java.util.Objects;
+
 public class Piece {
 
     public static final String BLACK_COLOR = "black";
@@ -30,12 +32,14 @@ public class Piece {
     public static Piece createMockPiece() {
         return new Piece(EMPTY_COLOR, "empty", EMPTY_REPRESENTATION);
     }
+
     public static Piece createWhitePawn() {
         return new Piece(WHITE_COLOR, "pawn", WHITE_PAWN_REPRESENTATION);
     }
     public static Piece createBlackPawn() {
         return new Piece(BLACK_COLOR, "pawn", BLACK_PAWN_REPRESENTATION);
     }
+
     public static Piece createWhiteKnight() {
         return new Piece(WHITE_COLOR, "knight", WHITE_KNIGHT_REPRESENTATION);
     }
@@ -49,18 +53,21 @@ public class Piece {
     public static Piece createBlackRook() {
         return new Piece(BLACK_COLOR, "rook", BLACK_ROOK_REPRESENTATION);
     }
+
     public static Piece createWhiteBishop() {
         return new Piece(WHITE_COLOR, "bishop", WHITE_BISHOP_REPRESENTATION);
     }
     public static Piece createBlackBishop() {
         return new Piece(BLACK_COLOR, "bishop", BLACK_BISHOP_REPRESENTATION);
     }
+
     public static Piece createWhiteQueen() {
         return new Piece(WHITE_COLOR, "queen", WHITE_QUEEN_REPRESENTATION);
     }
     public static Piece createBlackQueen() {
         return new Piece(BLACK_COLOR, "queen", BLACK_QUEEN_REPRESENTATION);
     }
+
     public static Piece createWhiteKing() {
         return new Piece(WHITE_COLOR, "king", WHITE_KING_REPRESENTATION);
     }
@@ -97,4 +104,24 @@ public class Piece {
     public boolean isBlack() {
         return BLACK_COLOR.equals(color);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        } else {
+            Piece piece = (Piece) obj;
+            return this.name.equals(piece.name) &&
+                    this.color.equals(piece.color) &&
+                    this.representation == piece.representation;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, name, representation);
+    }
+
 }

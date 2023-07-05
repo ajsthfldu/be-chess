@@ -7,6 +7,7 @@ import static softeer2nd.chess.pieces.Piece.*;
 
 public class PieceTest {
     @Test
+    @DisplayName("기물은 올바른 색상과 표현방법을 가지고 생성되어야 한다")
     public void create_piece() {
         verifyPiece(createWhitePawn(), WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
         verifyPiece(createBlackPawn(), BLACK_COLOR, BLACK_PAWN_REPRESENTATION);

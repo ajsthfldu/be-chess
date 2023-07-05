@@ -3,12 +3,18 @@ package softeer2nd.chess;
 import softeer2nd.chess.pieces.Piece;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.utils.StringUtils.NEWLINE;
 
 public class Board {
 
+    List<Rank> ranks = new ArrayList<>();
+
     Piece[][] piece2D = new Piece[8][8];
+
 
     public void initialize() {
         for (int i = 0; i < 8; i++) {
@@ -81,4 +87,8 @@ public class Board {
         }
         return count;
     }
+}
+
+class Rank {
+    List<Piece> pieces = new ArrayList<>();
 }

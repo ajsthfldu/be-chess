@@ -92,8 +92,8 @@ public class Board {
     }
 
     public Piece findPiece(String position) {
-        int[] xy = findPosition(position);
-        return ranks.get(xy[0]).pieces.get(xy[1]);
+        Position pos = new Position(position);
+        return ranks.get(pos.x).pieces.get(pos.y);
     }
 
     public void initializeEmpty() {
@@ -106,14 +106,19 @@ public class Board {
     }
 
     public void move(String position, Piece piece) {
-        int[] xy = findPosition(position);
-        ranks.get(xy[0]).pieces.set(xy[1], piece);
-    }
+        Position pos = new Position(position);
 
-    public int[] findPosition(String position) {
-        int x = 8 - (position.charAt(1) - '0');
-        int y = position.charAt(0) - 'a';
-        return new int[]{x, y};
+        ranks.get(pos.x).pieces.set(pos.y, piece);
+    }
+}
+
+class Position {
+    int x;
+    int y;
+
+    public Position(String position) {
+        x = 8 - (position.charAt(1) - '0');
+        y = position.charAt(0) - 'a';
     }
 }
 

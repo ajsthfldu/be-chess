@@ -76,10 +76,14 @@ public class Board {
     }
 
     public int pieceCount() {
+        return 64 - pieceCount(Color.NOCOLOR, Type.NO_PIECE);
+    }
+
+    public int pieceCount(Color color, Type type) {
         int count = 0;
         for (Rank rank : ranks) {
             for (Piece piece : rank.pieces) {
-                if (Type.NO_PIECE == piece.getType()) {
+                if (piece.getColor() == color && piece.getType() == type) {
                     ++count;
                 }
             }

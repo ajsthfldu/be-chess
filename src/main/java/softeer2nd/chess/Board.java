@@ -4,7 +4,9 @@ import softeer2nd.chess.pieces.Piece;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.chess.pieces.Piece.createWhiteBishop;
@@ -107,8 +109,32 @@ public class Board {
 
     public void move(String position, Piece piece) {
         Position pos = new Position(position);
-
         ranks.get(pos.x).pieces.set(pos.y, piece);
+    }
+
+    public double calculatePoint(Color color) {
+        double score = 0;
+        for (Rank rank : ranks) {
+            for (Piece piece : rank.pieces) {
+                if (piece.getColor() == color) {
+                    score += piece.getType().getDefaultScore();
+                }
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            int pawnCount = 0;
+            for (int j = 0; j < 8; j++) {
+                Piece piece = ranks.get(j).pieces.get(i);
+                if (piece.getColor() == color && piece.getType() == Type.PAWN) {
+                    ++pawnCount;
+                }
+            }
+            if (pawnCount > 1) {
+                score -= 0.5 * pawnCount;
+            }
+
+        }
+        return score;
     }
 }
 

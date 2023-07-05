@@ -9,12 +9,20 @@ public class Piece {
     }
 
     public enum Type {
-        PAWN('p'), KNIGHT('n'), ROOK('r'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+        PAWN('p', 1),
+        KNIGHT('n', 2.5),
+        BISHOP('b', 3),
+        ROOK('r', 5),
+        QUEEN('q', 9),
+        KING('k', 0),
+        NO_PIECE('.', 0);
 
         private final char representation;
+        private final double defaultScore;
 
-        Type(char representation) {
+        Type(char representation, double defaultScore) {
             this.representation = representation;
+            this.defaultScore = defaultScore;
         }
 
         public char getWhiteRepresentation() {
@@ -23,6 +31,10 @@ public class Piece {
 
         public char getBlackRepresentation() {
             return Character.toUpperCase(representation);
+        }
+
+        public double getDefaultScore() {
+            return defaultScore;
         }
     }
 

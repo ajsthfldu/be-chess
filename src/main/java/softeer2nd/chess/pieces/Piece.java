@@ -4,6 +4,29 @@ import java.util.Objects;
 
 public class Piece {
 
+    public enum Color {
+        WHITE, BLACK, NOCOLOR;
+    }
+
+    public enum Type {
+        PAWN('p'), KNIGHT('n'), ROOK('r'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+
+        private final char representation;
+
+        Type(char representation) {
+            this.representation = representation;
+        }
+
+        public char getWhiteRepresentation() {
+            return representation;
+        }
+
+        public char getBlackRepresentation() {
+            return Character.toUpperCase(representation);
+        }
+    }
+
+
     public static final String BLACK_COLOR = "black";
     public static final String WHITE_COLOR = "white";
     public static final String EMPTY_COLOR = "empty";
@@ -29,7 +52,7 @@ public class Piece {
     public static final char BLACK_KING_REPRESENTATION = 'K';
 
 
-    public static Piece createMockPiece() {
+    public static Piece createBlank() {
         return new Piece(EMPTY_COLOR, "empty", EMPTY_REPRESENTATION);
     }
 

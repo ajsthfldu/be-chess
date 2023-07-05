@@ -42,7 +42,7 @@ public class Board {
                         piece2D[i][j] = createWhiteKing();
                     }
                 } else {
-                    piece2D[i][j] = createMockPiece();
+                    piece2D[i][j] = createBlank();
                 }
             }
         }

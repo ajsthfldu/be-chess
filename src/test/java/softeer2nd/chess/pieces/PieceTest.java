@@ -26,8 +26,12 @@ public class PieceTest {
 
         verifyPiece(createWhiteKing(), WHITE_COLOR, WHITE_KING_REPRESENTATION);
         verifyPiece(createBlackKing(), BLACK_COLOR, BLACK_KING_REPRESENTATION);
+    }
 
-
+    @Test
+    public void getRepresentationPerPiece() throws Exception {
+        assertEquals('p', Type.PAWN.getWhiteRepresentation());
+        assertEquals('P', Type.PAWN.getBlackRepresentation());
     }
 
     private void verifyPiece(final Piece piece, final String color, final char representation) {

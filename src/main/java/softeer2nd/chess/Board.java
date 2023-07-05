@@ -49,22 +49,23 @@ public class Board {
     }
 
     public String showBoard() {
-        return getResultByColors(new String[]{EMPTY_COLOR, WHITE_COLOR, BLACK_COLOR}, true);
+        return getResult();
     }
 
-    private String getResultByColors(String[] colors, boolean newLine) {
+    private String getResult() {
         StringBuilder sb = new StringBuilder();
         for (Piece[] pieces : piece2D) {
             for (Piece piece : pieces) {
-                for (String color : colors) {
-                    if (color.equals(piece.getColor())) {
-                        sb.append(piece.getRepresentation());
-                    }
+                if (piece.getColor() == Color.WHITE) {
+                    sb.append(piece.getType().getWhiteRepresentation());
+                } else if (piece.getColor() == Color.BLACK) {
+                    sb.append(piece.getType().getBlackRepresentation());
+                } else {
+                    sb.append(piece.getType().getWhiteRepresentation());
                 }
+
             }
-            if (newLine) {
-                sb.append(NEWLINE);
-            }
+            sb.append(NEWLINE);
         }
         return sb.toString();
     }
@@ -73,7 +74,7 @@ public class Board {
         int count = 0;
         for (Piece[] pieces : piece2D) {
             for (Piece piece : pieces) {
-                if (!"empty".equals(piece.getName())) {
+                if (Type.NO_PIECE == piece.getType()) {
                     ++count;
                 }
             }

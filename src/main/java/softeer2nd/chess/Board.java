@@ -7,48 +7,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static softeer2nd.chess.pieces.Piece.*;
+import static softeer2nd.chess.pieces.Piece.createWhiteBishop;
 import static softeer2nd.utils.StringUtils.NEWLINE;
 
 public class Board {
 
     List<Rank> ranks = new ArrayList<>();
 
-    Piece[][] piece2D = new Piece[8][8];
-
-
     public void initialize() {
         for (int i = 0; i < 8; i++) {
+            ranks.add(new Rank());
             for (int j = 0; j < 8; j++) {
                 if (i == 1) {
-                    piece2D[i][j] = createBlackPawn();
+                    ranks.get(i).pieces.add(createBlackPawn());
                 } else if (i == 6) {
-                    piece2D[i][j] = createWhitePawn();
+                    ranks.get(i).pieces.add(createWhitePawn());
                 } else if (i == 0) {
                     if (j == 0 || j == 7) {
-                        piece2D[i][j] = createBlackRook();
+                        ranks.get(i).pieces.add(createBlackRook());
                     } else if (j == 1 || j == 6) {
-                        piece2D[i][j] = createBlackKnight();
+                        ranks.get(i).pieces.add(createBlackKnight());
                     } else if (j == 2 || j == 5) {
-                        piece2D[i][j] = createBlackBishop();
+                        ranks.get(i).pieces.add(createBlackBishop());
                     } else if (j == 3) {
-                        piece2D[i][j] = createBlackQueen();
+                        ranks.get(i).pieces.add(createBlackQueen());
                     } else {
-                        piece2D[i][j] = createBlackKing();
+                        ranks.get(i).pieces.add(createBlackKing());
                     }
                 } else if (i == 7) {
                     if (j == 0 || j == 7) {
-                        piece2D[i][j] = createWhiteRook();
+                        ranks.get(i).pieces.add(createWhiteRook());
                     } else if (j == 1 || j == 6) {
-                        piece2D[i][j] = createWhiteKnight();
+                        ranks.get(i).pieces.add(createWhiteKnight());
                     } else if (j == 2 || j == 5) {
-                        piece2D[i][j] = createWhiteBishop();
+                        ranks.get(i).pieces.add(createWhiteBishop());
                     } else if (j == 3) {
-                        piece2D[i][j] = createWhiteQueen();
+                        ranks.get(i).pieces.add(createWhiteQueen());
                     } else {
-                        piece2D[i][j] = createWhiteKing();
+                        ranks.get(i).pieces.add(createWhiteKing());
                     }
                 } else {
-                    piece2D[i][j] = createBlank();
+                    ranks.get(i).pieces.add(createBlank());
                 }
             }
         }
@@ -60,8 +59,8 @@ public class Board {
 
     private String getResult() {
         StringBuilder sb = new StringBuilder();
-        for (Piece[] pieces : piece2D) {
-            for (Piece piece : pieces) {
+        for (Rank rank : ranks) {
+            for (Piece piece : rank.pieces) {
                 if (piece.getColor() == Color.WHITE) {
                     sb.append(piece.getType().getWhiteRepresentation());
                 } else if (piece.getColor() == Color.BLACK) {
@@ -78,8 +77,8 @@ public class Board {
 
     public int pieceCount() {
         int count = 0;
-        for (Piece[] pieces : piece2D) {
-            for (Piece piece : pieces) {
+        for (Rank rank : ranks) {
+            for (Piece piece : rank.pieces) {
                 if (Type.NO_PIECE == piece.getType()) {
                     ++count;
                 }

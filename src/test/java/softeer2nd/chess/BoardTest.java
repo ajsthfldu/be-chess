@@ -6,6 +6,7 @@ import static softeer2nd.utils.StringUtils.appendNewLine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import softeer2nd.chess.pieces.Piece;
 
 public class BoardTest {
     Board board;
@@ -28,5 +29,25 @@ public class BoardTest {
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"),
                 board.showBoard());
+    }
+
+    @Test
+    void pieceCount() {
+        board.initialize();
+        assertEquals(32, board.pieceCount(Piece.Color.NOCOLOR, Piece.Type.NO_PIECE));
+
+        assertEquals(8, board.pieceCount(Piece.Color.WHITE, Piece.Type.PAWN));
+        assertEquals(2, board.pieceCount(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        assertEquals(2, board.pieceCount(Piece.Color.WHITE, Piece.Type.ROOK));
+        assertEquals(2, board.pieceCount(Piece.Color.WHITE, Piece.Type.BISHOP));
+        assertEquals(1, board.pieceCount(Piece.Color.WHITE, Piece.Type.QUEEN));
+        assertEquals(1, board.pieceCount(Piece.Color.WHITE, Piece.Type.KING));
+
+        assertEquals(8, board.pieceCount(Piece.Color.BLACK, Piece.Type.PAWN));
+        assertEquals(2, board.pieceCount(Piece.Color.BLACK, Piece.Type.KNIGHT));
+        assertEquals(2, board.pieceCount(Piece.Color.BLACK, Piece.Type.ROOK));
+        assertEquals(2, board.pieceCount(Piece.Color.BLACK, Piece.Type.BISHOP));
+        assertEquals(1, board.pieceCount(Piece.Color.BLACK, Piece.Type.QUEEN));
+        assertEquals(1, board.pieceCount(Piece.Color.BLACK, Piece.Type.KING));
     }
 }

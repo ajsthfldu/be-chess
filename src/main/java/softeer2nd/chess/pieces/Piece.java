@@ -134,4 +134,8 @@ public class Piece {
         return Objects.hash(color, type);
     }
 
+    @Override
+    public String toString() {
+        return this.getColor().toString() + "_" + this.getType().toString();
+    }
 }

@@ -13,6 +13,8 @@ import static softeer2nd.utils.StringUtils.NEWLINE;
 public class Board {
 
     List<Rank> ranks = new ArrayList<>();
+    List<Piece> whitePieces = new ArrayList<>();
+    List<Piece> blackPieces = new ArrayList<>();
 
     public void initialize() {
         for (int i = 0; i < 8; i++) {
@@ -108,6 +110,11 @@ public class Board {
     public void move(String position, Piece piece) {
         Position pos = new Position(position);
         ranks.get(pos.x).pieces.set(pos.y, piece);
+        if (piece.getColor() == Color.BLACK) {
+            blackPieces.add(piece);
+        } else {
+            whitePieces.add(piece);
+        }
     }
 
     public double calculatePoint(Color color) {
@@ -133,6 +140,24 @@ public class Board {
 
         }
         return score;
+    }
+
+    public List<Piece> getBlackPieces(boolean reverse) {
+        if (!reverse) {
+            blackPieces.sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
+        } else {
+            blackPieces.sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
+        }
+        return blackPieces;
+    }
+
+    public List<Piece> getWhitePieces(boolean reverse) {
+        if (!reverse) {
+            whitePieces.sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
+        } else {
+            whitePieces.sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
+        }
+        return whitePieces;
     }
 }
 

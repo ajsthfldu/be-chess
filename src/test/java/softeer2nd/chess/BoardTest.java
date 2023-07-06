@@ -37,6 +37,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("보드는 기물의 수를 파악해야 한다")
     void pieceCount() {
         board.initialize();
         assertEquals(32, board.pieceCount(Color.NOCOLOR, Type.NO_PIECE));
@@ -57,6 +58,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("어떤 위치에 어떤 기물이 있는 지 알 수 있어야 한다")
     public void findPiece() throws Exception {
         board.initialize();
 
@@ -67,6 +69,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("기물을 지정한 위치에 놓을 수 있어야 한다")
     public void move() throws Exception {
         board.initializeEmpty();
 
@@ -79,6 +82,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("색상별 점수를 계산할 수 있어야 한다")
     public void calculatePoint() throws Exception {
         board.initializeEmpty();
 
@@ -110,6 +114,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("색상별 기물의 점수에 따라 정렬된 리스트를 얻을 수 있어야 한다")
     public void getSortedPieces() {
         board.initializeEmpty();
 

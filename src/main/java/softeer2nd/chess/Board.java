@@ -56,10 +56,6 @@ public class Board {
     }
 
     public String showBoard() {
-        return getResult();
-    }
-
-    private String getResult() {
         StringBuilder sb = new StringBuilder();
         for (Rank rank : ranks) {
             for (Piece piece : rank.pieces) {

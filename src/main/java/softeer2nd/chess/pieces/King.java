@@ -15,9 +15,12 @@ public class King extends Piece {
     public boolean verifyMovePosition(ChessGame game, Position sourcePosition, Position targetPosition) {
         List<Direction> directions = Direction.everyDirection();
         for (Direction direction : directions) {
-            Position nPosition = sourcePosition.moved(direction);
-            if (nPosition == targetPosition) {
-                return true;
+            try {
+                Position nPosition = sourcePosition.moved(direction);
+                if (nPosition.equals(targetPosition)) {
+                    return true;
+                }
+            } catch (Exception ignored) {
             }
         }
         return false;

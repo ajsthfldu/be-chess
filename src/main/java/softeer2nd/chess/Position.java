@@ -38,11 +38,6 @@ public class Position {
         }
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(xDegree, yDegree);
-    }
-
     public Position moved(Direction direction) {
         return new Position(xDegree + direction.getXDegree(), yDegree + direction.getYDegree());
     }

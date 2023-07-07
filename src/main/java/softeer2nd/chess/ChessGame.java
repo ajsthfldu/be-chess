@@ -6,9 +6,14 @@ import java.util.List;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.chess.pieces.PieceFactory.*;
+import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class ChessGame {
     private final Board board;
+
+    public ChessGame() {
+        board = new Board();
+    }
 
     public ChessGame(Board board) {
         this.board = board;
@@ -19,52 +24,20 @@ public class ChessGame {
     }
 
     public void initialize() {
+        String blankRank = appendNewLine("........");
+        String boardString =
+                appendNewLine("RNBQKBNR") +
+                appendNewLine("PPPPPPPP") +
+                blankRank + blankRank + blankRank + blankRank +
+                appendNewLine("pppppppp") +
+                appendNewLine("rnbqkbnr");
         board.clear();
-        for (int i = 0; i < 8; i++) {
-            board.getRanks().add(new Rank());
-            for (int j = 0; j < 8; j++) {
-                if (i == 1) {
-                    board.getRanks().get(i).getPieces().add(createBlackPawn());
-                } else if (i == 6) {
-                    board.getRanks().get(i).getPieces().add(createWhitePawn());
-                } else if (i == 0) {
-                    if (j == 0 || j == 7) {
-                        board.getRanks().get(i).getPieces().add(createBlackRook());
-                    } else if (j == 1 || j == 6) {
-                        board.getRanks().get(i).getPieces().add(createBlackKnight());
-                    } else if (j == 2 || j == 5) {
-                        board.getRanks().get(i).getPieces().add(createBlackBishop());
-                    } else if (j == 3) {
-                        board.getRanks().get(i).getPieces().add(createBlackQueen());
-                    } else {
-                        board.getRanks().get(i).getPieces().add(createBlackKing());
-                    }
-                } else if (i == 7) {
-                    if (j == 0 || j == 7) {
-                        board.getRanks().get(i).getPieces().add(createWhiteRook());
-                    } else if (j == 1 || j == 6) {
-                        board.getRanks().get(i).getPieces().add(createWhiteKnight());
-                    } else if (j == 2 || j == 5) {
-                        board.getRanks().get(i).getPieces().add(createWhiteBishop());
-                    } else if (j == 3) {
-                        board.getRanks().get(i).getPieces().add(createWhiteQueen());
-                    } else {
-                        board.getRanks().get(i).getPieces().add(createWhiteKing());
-                    }
-                } else {
-                    board.getRanks().get(i).getPieces().add(createBlank());
-                }
-            }
-        }
+        board.initBoard(boardString);
     }
 
     public void initializeEmpty() {
-        for (int i = 0; i < 8; i++) {
-            board.getRanks().add(new Rank());
-            for (int j = 0; j < 8; j++) {
-                board.getRanks().get(i).getPieces().add(createBlank());
-            }
-        }
+        board.clear();
+        board.initBoard();
     }
 
 
@@ -95,16 +68,7 @@ public class ChessGame {
 
     public void move(String position, Piece piece) {
         Position pos = new Position(position);
-        move(pos, piece);
-    }
-
-    public void move(Position position, Piece piece) {
-        board.getRanks().get(position.getYDegree()).getPieces().set(position.getXDegree(), piece);
-        if (piece.getColor() == Color.BLACK) {
-            board.getBlackPieces().add(piece);
-        } else {
-            board.getWhitePieces().add(piece);
-        }
+        board.move(pos, piece);
     }
 
     public void move(String sourcePosition, String targetPosition) {
@@ -115,12 +79,12 @@ public class ChessGame {
         Piece piece = findPiece(sourcePosition);
 
         if (findPiece(targetPosition).getColor() == findPiece(sourcePosition).getColor()) {
-            throw new RuntimeException("같은 편 위치로 이동할 수 없습니다.");
+            System.out.println("같은 편 위치로 이동할 수 없습니다.");
         } else if (piece.verifyMovePosition(this, sourcePosition, targetPosition)) {
-            move(targetPosition, piece);
-            move(sourcePosition, createBlank());
+            board.move(targetPosition, piece);
+            board.move(sourcePosition, createBlank());
         } else {
-            throw new RuntimeException("해당 위치로 이동할 수 없습니다.");
+            System.out.println("해당 위치로 이동할 수 없습니다.");
         }
     }
 
@@ -166,5 +130,9 @@ public class ChessGame {
             this.getBoard().getWhitePieces().sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
         }
         return this.getBoard().getWhitePieces();
+    }
+
+    public boolean isBlank(Position nPosition) {
+        return findPiece(nPosition).equals(createBlank());
     }
 }

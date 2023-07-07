@@ -10,6 +10,6 @@ public class Blank extends Piece {
 
     @Override
     public boolean verifyMovePosition(ChessGame chessGame, Position sourcePosition, Position targetPosition) {
-        return true;
+        return false;
     }
 }

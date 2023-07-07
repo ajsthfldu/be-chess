@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Piece;
+import softeer2nd.chess.Rank;
 
 
 import java.util.ArrayList;
@@ -24,22 +25,10 @@ public class Board {
         return blackPieces;
     }
 
-    public List<Piece> getSortedBlackPieces(boolean reverse) {
-        if (!reverse) {
-            blackPieces.sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
-        } else {
-            blackPieces.sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
-        }
-        return blackPieces;
-    }
-
-    public List<Piece> getSortedWhitePieces(boolean reverse) {
-        if (!reverse) {
-            whitePieces.sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
-        } else {
-            whitePieces.sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
-        }
-        return whitePieces;
+    public void clear() {
+        ranks.clear();
+        whitePieces.clear();
+        blackPieces.clear();
     }
 }
 

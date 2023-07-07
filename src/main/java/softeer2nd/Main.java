@@ -25,6 +25,7 @@ public class Main {
             } else if (input.startsWith("move")) {
                 String[] s = input.split(" ");
                 game.move(s[1], s[2]);
+                System.out.println(view.showBoard());
             }
         }
     }

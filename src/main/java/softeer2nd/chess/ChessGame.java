@@ -2,7 +2,10 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Piece;
 
+import java.util.List;
+
 import static softeer2nd.chess.pieces.Piece.*;
+import static softeer2nd.chess.pieces.PieceFactory.*;
 
 public class ChessGame {
     private final Board board;
@@ -16,6 +19,7 @@ public class ChessGame {
     }
 
     public void initialize() {
+        board.clear();
         for (int i = 0; i < 8; i++) {
             board.getRanks().add(new Rank());
             for (int j = 0; j < 8; j++) {
@@ -82,12 +86,20 @@ public class ChessGame {
 
     public Piece findPiece(String position) {
         Position pos = new Position(position);
-        return board.getRanks().get(pos.x).getPieces().get(pos.y);
+        return board.getRanks().get(pos.getYDegree()).getPieces().get(pos.getXDegree());
+    }
+
+    public Piece findPiece(Position position) {
+        return board.getRanks().get(position.getYDegree()).getPieces().get(position.getXDegree());
     }
 
     public void move(String position, Piece piece) {
         Position pos = new Position(position);
-        board.getRanks().get(pos.x).getPieces().set(pos.y, piece);
+        move(pos, piece);
+    }
+
+    public void move(Position position, Piece piece) {
+        board.getRanks().get(position.getYDegree()).getPieces().set(position.getXDegree(), piece);
         if (piece.getColor() == Color.BLACK) {
             board.getBlackPieces().add(piece);
         } else {
@@ -96,7 +108,20 @@ public class ChessGame {
     }
 
     public void move(String sourcePosition, String targetPosition) {
-        move(targetPosition, findPiece(sourcePosition));
+        move(new Position(sourcePosition), new Position(targetPosition));
+    }
+
+    public void move(Position sourcePosition, Position targetPosition) {
+        Piece piece = findPiece(sourcePosition);
+
+        if (findPiece(targetPosition).getColor() == findPiece(sourcePosition).getColor()) {
+            throw new RuntimeException("같은 편 위치로 이동할 수 없습니다.");
+        } else if (piece.verifyMovePosition(this, sourcePosition, targetPosition)) {
+            move(targetPosition, piece);
+            move(sourcePosition, createBlank());
+        } else {
+            throw new RuntimeException("해당 위치로 이동할 수 없습니다.");
+        }
     }
 
     public double calculatePoint(Color color) {
@@ -122,5 +147,24 @@ public class ChessGame {
 
         }
         return score;
+    }
+
+
+    public List<Piece> getSortedBlackPieces(boolean reverse) {
+        if (!reverse) {
+            this.getBoard().getBlackPieces().sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
+        } else {
+            this.getBoard().getBlackPieces().sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
+        }
+        return this.getBoard().getBlackPieces();
+    }
+
+    public List<Piece> getSortedWhitePieces(boolean reverse) {
+        if (!reverse) {
+            this.getBoard().getWhitePieces().sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
+        } else {
+            this.getBoard().getWhitePieces().sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
+        }
+        return this.getBoard().getWhitePieces();
     }
 }

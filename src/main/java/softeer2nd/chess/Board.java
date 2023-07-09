@@ -22,14 +22,20 @@ public class Board {
     }
 
     public void initBoard() {
+        clear();
         for (int i = 0; i < 8; i++) {
             ranks.add(new Rank());
         }
     }
 
     public void initBoard(String boardString) {
+        clear();
         for (String rankString : boardString.split(NEWLINE)) {
             ranks.add(new Rank(rankString));
+        }
+        for (Rank rank : ranks) {
+            whitePieces.addAll(rank.getPieces(Color.WHITE));
+            blackPieces.addAll(rank.getPieces(Color.BLACK));
         }
     }
 
@@ -49,6 +55,10 @@ public class Board {
             whitePieces.add(piece);
             whitePieces.remove(removedPiece);
         }
+    }
+
+    public void move(Position from, Position to) {
+
     }
 
     public int pieceCount(Piece piece) {

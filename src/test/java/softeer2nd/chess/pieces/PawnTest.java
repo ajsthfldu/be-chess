@@ -23,7 +23,7 @@ class PawnTest {
         game.initializeEmpty();
         Piece pawn = createWhitePawn();
         game.move("a1", pawn);
-        assertTrue(pawn.verifyMovePosition(game, new Position("a1"), new Position("a2")));
+        assertTrue(pawn.verifyMovePosition(game.getBoard(), new Position("a1"), new Position("a2")));
     }
 
 }

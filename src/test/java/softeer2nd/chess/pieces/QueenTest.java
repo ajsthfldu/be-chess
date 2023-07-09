@@ -13,7 +13,7 @@ import static softeer2nd.chess.pieces.PieceFactory.createWhiteQueen;
 class QueenTest {
     ChessGame game;
     @BeforeEach
-    void setup() {
+    void setUp() {
         game = new ChessGame(new Board());
     }
 
@@ -23,6 +23,6 @@ class QueenTest {
         Piece queen = createWhiteQueen();
         game.move("a1", queen);
         game.move("a2", createWhiteKing());
-        assertTrue(queen.verifyMovePosition(game, new Position("a1"), new Position("h8")));
+        assertTrue(queen.verifyMovePosition(game.getBoard(), new Position("a1"), new Position("h8")));
     }
 }

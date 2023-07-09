@@ -22,6 +22,6 @@ class KingTest {
         game.initializeEmpty();
         Piece king = createWhiteKing();
         game.move("a1", king);
-        assertTrue(king.verifyMovePosition(game, new Position("a1"), new Position("a2")));
+        assertTrue(king.verifyMovePosition(game.getBoard(), new Position("a1"), new Position("a2")));
     }
 }

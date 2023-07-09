@@ -24,12 +24,10 @@ public class ChessGame {
                 blankRank + blankRank + blankRank + blankRank +
                 appendNewLine("pppppppp") +
                 appendNewLine("rnbqkbnr");
-        board.clear();
         board.initBoard(boardString);
     }
 
     public void initializeEmpty() {
-        board.clear();
         board.initBoard();
     }
 
@@ -38,19 +36,6 @@ public class ChessGame {
     }
 
     public void move(String sourcePosition, String targetPosition) {
-        move(new Position(sourcePosition), new Position(targetPosition));
-    }
-
-    public void move(Position sourcePosition, Position targetPosition) {
-        Piece piece = board.findPiece(sourcePosition);
-
-        if (piece.getColor() == board.findPiece(targetPosition).getColor()) {
-            System.out.println("같은 편 위치로 이동할 수 없습니다.");
-        } else if (piece.verifyMovePosition(board, sourcePosition, targetPosition)) {
-            board.move(targetPosition, piece);
-            board.move(sourcePosition, createBlank());
-        } else {
-            System.out.println("해당 위치로 이동할 수 없습니다.");
-        }
+        board.move(new Position(sourcePosition), new Position(targetPosition));
     }
 }

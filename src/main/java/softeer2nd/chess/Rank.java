@@ -4,6 +4,7 @@ import softeer2nd.chess.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static softeer2nd.chess.pieces.PieceFactory.*;
 
@@ -64,6 +65,12 @@ class Rank {
 
     public List<Piece> getPieces() {
         return pieces;
+    }
+
+    public List<Piece> getPieces(Piece.Color color) {
+        return pieces.stream()
+                .filter(piece -> piece.getColor() == color)
+                .collect(Collectors.toList());
     }
 
     public Piece findPiece(Position position) {

@@ -15,14 +15,13 @@ public class ChessView {
         StringBuilder sb = new StringBuilder();
         for (Rank rank : board.getRanks()) {
             for (Piece piece : rank.getPieces()) {
-                if (piece.getColor() == Piece.Color.WHITE) {
+                if (piece.isWhite()) {
                     sb.append(piece.getType().getWhiteRepresentation());
-                } else if (piece.getColor() == Piece.Color.BLACK) {
+                } else if (piece.isBlack()) {
                     sb.append(piece.getType().getBlackRepresentation());
                 } else {
                     sb.append(piece.getType().getWhiteRepresentation());
                 }
-
             }
             sb.append(NEWLINE);
         }

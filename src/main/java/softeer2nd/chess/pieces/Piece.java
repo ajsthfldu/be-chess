@@ -1,6 +1,6 @@
 package softeer2nd.chess.pieces;
 
-import softeer2nd.chess.ChessGame;
+import softeer2nd.chess.Board;
 import softeer2nd.chess.Position;
 
 import java.util.Objects;
@@ -65,7 +65,7 @@ abstract public class Piece {
         return color == Color.BLACK;
     }
 
-    abstract public boolean verifyMovePosition(ChessGame chessGame, Position sourcePosition, Position targetPosition);
+    abstract public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition);
 
     @Override
     public boolean equals(Object obj) {
@@ -86,6 +86,6 @@ abstract public class Piece {
 
     @Override
     public String toString() {
-        return this.getColor().toString() + "_" + this.getType().toString();
+        return color.toString() + "_" + type.toString();
     }
 }

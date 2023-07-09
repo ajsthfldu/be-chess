@@ -1,6 +1,6 @@
 package softeer2nd.chess.pieces;
 
-import softeer2nd.chess.ChessGame;
+import softeer2nd.chess.Board;
 import softeer2nd.chess.Direction;
 import softeer2nd.chess.Position;
 
@@ -12,9 +12,9 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(ChessGame game, Position sourcePosition, Position targetPosition) {
+    public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition) {
         List<Direction> directions;
-        if (this.getColor() == Color.WHITE) {
+        if (isWhite()) {
             directions = Direction.whitePawnDirection();
         } else {
             directions = Direction.blackPawnDirection();

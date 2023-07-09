@@ -1,5 +1,6 @@
 package softeer2nd.chess.pieces;
 
+import softeer2nd.chess.Board;
 import softeer2nd.chess.ChessGame;
 import softeer2nd.chess.Direction;
 import softeer2nd.chess.Position;
@@ -11,11 +12,11 @@ public class Rook extends Piece {
         super(color, Type.ROOK);
     }
     @Override
-    public boolean verifyMovePosition(ChessGame game, Position sourcePosition, Position targetPosition) {
+    public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition) {
         List<Direction> directions = Direction.linearDirection();
         for (Direction direction : directions) {
             try {
-                if (verifyDirection(game, direction, sourcePosition, targetPosition)) {
+                if (verifyDirection(board, direction, sourcePosition, targetPosition)) {
                     return true;
                 }
             } catch (Exception ignored) {
@@ -24,14 +25,14 @@ public class Rook extends Piece {
         return false;
     }
 
-    public boolean verifyDirection(ChessGame game, Direction direction, Position position, Position targetPosition) {
+    public boolean verifyDirection(Board board, Direction direction, Position position, Position targetPosition) {
         Position nPosition = position.moved(direction);
         if (nPosition.equals(targetPosition)) {
             return true;
         }
-        if (!game.isBlank(nPosition)) {
+        if (!board.isBlank(nPosition)) {
             return false;
         }
-        return verifyDirection(game, direction, nPosition, targetPosition);
+        return verifyDirection(board, direction, nPosition, targetPosition);
     }
 }

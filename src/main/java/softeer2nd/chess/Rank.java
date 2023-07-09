@@ -66,8 +66,17 @@ class Rank {
         return pieces;
     }
 
-    public void updatePiece(int index, Piece piece) {
-        pieces.set(index, piece);
+    public Piece findPiece(Position position) {
+        return pieces.get(position.getXDegree());
     }
 
+    public void updatePiece(Position position, Piece piece) {
+        pieces.set(position.getXDegree(), piece);
+    }
+
+    public int pieceCount(Piece fpiece) {
+        return (int) pieces.stream()
+                .filter(piece -> piece.equals(fpiece))
+                .count();
+    }
 }

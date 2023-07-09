@@ -1,49 +1,63 @@
 package softeer2nd.chess.pieces;
 
 public class PieceFactory {
+    private static final Piece blank = new Blank();
+    private static final Piece whitePawn = new Pawn(Piece.Color.WHITE);
+    private static final Piece whiteKnight = new Knight(Piece.Color.WHITE);
+    private static final Piece whiteBishop = new Bishop(Piece.Color.WHITE);
+    private static final Piece whiteRook = new Rook(Piece.Color.WHITE);
+    private static final Piece whiteQueen = new Queen(Piece.Color.WHITE);
+    private static final Piece whiteKing = new King(Piece.Color.WHITE);
+    private static final Piece blackPawn = new Pawn(Piece.Color.BLACK);
+    private static final Piece blackKnight = new Knight(Piece.Color.BLACK);
+    private static final Piece blackBishop = new Bishop(Piece.Color.BLACK);
+    private static final Piece blackRook = new Rook(Piece.Color.BLACK);
+    private static final Piece blackQueen = new Queen(Piece.Color.BLACK);
+    private static final Piece blackKing = new King(Piece.Color.BLACK);
+
     public static Piece createBlank() {
-        return new Blank();
+        return blank;
     }
 
     public static Piece createWhitePawn() {
-        return new Pawn(Piece.Color.WHITE);
+        return whitePawn;
     }
     public static Piece createBlackPawn() {
-        return new Pawn(Piece.Color.BLACK);
+        return blackPawn;
     }
 
     public static Piece createWhiteKnight() {
-        return new Knight(Piece.Color.WHITE);
+        return whiteKnight;
     }
     public static Piece createBlackKnight() {
-        return new Knight(Piece.Color.BLACK);
-    }
-
-    public static Piece createWhiteRook() {
-        return new Rook(Piece.Color.WHITE);
-    }
-    public static Piece createBlackRook() {
-        return new Rook(Piece.Color.BLACK);
+        return blackKnight;
     }
 
     public static Piece createWhiteBishop() {
-        return new Bishop(Piece.Color.WHITE);
+        return whiteBishop;
     }
     public static Piece createBlackBishop() {
-        return new Bishop(Piece.Color.BLACK);
+        return blackBishop;
+    }
+
+    public static Piece createWhiteRook() {
+        return whiteRook;
+    }
+    public static Piece createBlackRook() {
+        return blackRook;
     }
 
     public static Piece createWhiteQueen() {
-        return new Queen(Piece.Color.WHITE);
+        return whiteQueen;
     }
     public static Piece createBlackQueen() {
-        return new Queen(Piece.Color.BLACK);
+        return blackQueen;
     }
 
     public static Piece createWhiteKing() {
-        return new King(Piece.Color.WHITE);
+        return whiteKing;
     }
     public static Piece createBlackKing() {
-        return new King(Piece.Color.BLACK);
+        return blackKing;
     }
 }

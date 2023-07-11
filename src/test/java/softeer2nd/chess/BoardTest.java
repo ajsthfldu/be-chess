@@ -30,10 +30,10 @@ class BoardTest {
         List<Rank> ranks = board.getRanks();
         assertEquals(ranks.get(0).getRepresentation(), "RNBQKBNR");
         assertEquals(ranks.get(1).getRepresentation(), "PPPPPPPP");
-        assertEquals(ranks.get(2).getRepresentation(), blankRank);
-        assertEquals(ranks.get(3).getRepresentation(), blankRank);
-        assertEquals(ranks.get(4).getRepresentation(), blankRank);
-        assertEquals(ranks.get(5).getRepresentation(), blankRank);
+        assertEquals(ranks.get(2).getRepresentation(), "........");
+        assertEquals(ranks.get(3).getRepresentation(), "........");
+        assertEquals(ranks.get(4).getRepresentation(), "........");
+        assertEquals(ranks.get(5).getRepresentation(), "........");
         assertEquals(ranks.get(6).getRepresentation(), "pppppppp");
         assertEquals(ranks.get(7).getRepresentation(), "rnbqkbnr");
     }
@@ -55,5 +55,11 @@ class BoardTest {
         board.initBoard(boardString);
         assertEquals(board.calculateWhitePoint(), 38.0);
         assertEquals(board.calculateBlackPoint(), 38.0);
+    }
+
+    @Test
+    @DisplayName("기물의 점수를 기준으로 정렬할 수 있어야 한다.")
+    void sort() {
+        fail();
     }
 }

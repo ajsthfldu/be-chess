@@ -41,6 +41,7 @@ public class Board {
             whitePieces.addAll(rank.getPieces(Color.WHITE));
             blackPieces.addAll(rank.getPieces(Color.BLACK));
         }
+        notifyObservers();
     }
 
     private void clear() {
@@ -66,8 +67,16 @@ public class Board {
     }
 
     public void move(Position from, Position to) {
-        move(to, findPiece(from));
-        move(from, createBlank());
+        Piece piece = findPiece(from);
+        if (findPiece(from).getColor() == findPiece(to).getColor()) {
+            notifyObservers();
+            return;
+        }
+        if (piece.verifyMovePosition(this, from, to)) {
+            move(to, piece);
+            move(from, createBlank());
+        }
+        notifyObservers();
     }
 
     public int pieceCount(Piece piece) {

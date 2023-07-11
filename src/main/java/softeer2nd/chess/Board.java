@@ -66,7 +66,8 @@ public class Board {
     }
 
     public void move(Position from, Position to) {
-
+        move(to, findPiece(from));
+        move(from, createBlank());
     }
 
     public int pieceCount(Piece piece) {

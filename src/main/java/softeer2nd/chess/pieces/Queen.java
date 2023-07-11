@@ -15,24 +15,25 @@ public class Queen extends Piece {
     public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition) {
         List<Direction> directions = Direction.everyDirection();
         for (Direction direction : directions) {
-            try {
-                if (verifyDirection(board, direction, sourcePosition, targetPosition)) {
-                    return true;
-                }
-            } catch (Exception ignored) {
+            if (verifyDirection(board, direction, sourcePosition, targetPosition)) {
+                return true;
             }
         }
         return false;
     }
 
     public boolean verifyDirection(Board board, Direction direction, Position position, Position targetPosition) {
-        Position nPosition = position.moved(direction);
-        if (nPosition.equals(targetPosition)) {
-            return true;
-        }
-        if (!board.isBlank(nPosition)) {
+        try {
+            Position nPosition = position.moved(direction);
+            if (nPosition.equals(targetPosition)) {
+                return true;
+            }
+            if (!board.isBlank(nPosition)) {
+                return false;
+            }
+            return verifyDirection(board, direction, nPosition, targetPosition);
+        } catch (Exception e) {
             return false;
         }
-        return verifyDirection(board, direction, nPosition, targetPosition);
     }
 }

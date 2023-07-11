@@ -5,6 +5,7 @@ import softeer2nd.chess.Rank;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static softeer2nd.chess.pieces.Piece.*;
@@ -94,9 +95,9 @@ public class Board {
 
     public List<Piece> getSortedBlackPieces(boolean reverse) {
         if (!reverse) {
-            blackPieces.sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
+            blackPieces.sort(Comparator.comparingDouble(o -> -o.getType().getDefaultPoint()));
         } else {
-            blackPieces.sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
+            blackPieces.sort(Comparator.comparingDouble(o -> o.getType().getDefaultPoint()));
         }
         return blackPieces;
     }
@@ -104,9 +105,9 @@ public class Board {
 
     public List<Piece> getSortedWhitePieces(boolean reverse) {
         if (!reverse) {
-            whitePieces.sort((o1, o2) -> (int) (o2.getType().getDefaultPoint() - o1.getType().getDefaultPoint()));
+            whitePieces.sort(Comparator.comparingDouble(o -> -o.getType().getDefaultPoint()));
         } else {
-            whitePieces.sort((o1, o2) -> (int) (o1.getType().getDefaultPoint() - o2.getType().getDefaultPoint()));
+            whitePieces.sort(Comparator.comparingDouble(o -> o.getType().getDefaultPoint()));
         }
         return whitePieces;
     }

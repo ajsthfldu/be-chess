@@ -11,12 +11,6 @@ import static softeer2nd.chess.pieces.PieceFactory.*;
 class Rank {
     private final List<Piece> pieces = new ArrayList<>();
 
-    public Rank() {
-        for (int i = 0; i < 8; i++) {
-            pieces.add(createBlank());
-        }
-    }
-
     public Rank(String rankStr) {
         for (char r : rankStr.toCharArray()) {
             switch (r) {
@@ -85,5 +79,9 @@ class Rank {
         return (int) pieces.stream()
                 .filter(piece -> piece.equals(fpiece))
                 .count();
+    }
+
+    public String getRepresentation() {
+        return pieces.stream().map(Piece::getRepresentation).map(String::valueOf).collect(Collectors.joining());
     }
 }

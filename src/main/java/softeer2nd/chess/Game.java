@@ -2,18 +2,13 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Piece;
 
-import static softeer2nd.chess.pieces.PieceFactory.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
-public class ChessGame {
+public class Game {
     private final Board board;
 
-    public ChessGame(Board board) {
+    public Game(Board board) {
         this.board = board;
-    }
-
-    public Board getBoard() {
-        return board;
     }
 
     public void initialize() {
@@ -27,15 +22,7 @@ public class ChessGame {
         board.initBoard(boardString);
     }
 
-    public void initializeEmpty() {
-        board.initBoard();
-    }
-
-    public void move(String position, Piece piece) {
-        board.move(new Position(position), piece);
-    }
-
     public void move(String sourcePosition, String targetPosition) {
-        board.move(new Position(sourcePosition), new Position(targetPosition));
+        board.move(sourcePosition, targetPosition);
     }
 }

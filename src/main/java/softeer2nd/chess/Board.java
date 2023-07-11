@@ -17,15 +17,18 @@ public class Board {
     private final List<Piece> whitePieces = new ArrayList<>();
     private final List<Piece> blackPieces = new ArrayList<>();
 
-    public List<Rank> getRanks() {
-        return ranks;
+    private final List<Observer> observers = new ArrayList<>();
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
     }
 
-    public void initBoard() {
-        clear();
-        for (int i = 0; i < 8; i++) {
-            ranks.add(new Rank());
-        }
+    public void notifyObservers() {
+        observers.forEach(Observer::update);
+    }
+
+    public List<Rank> getRanks() {
+        return ranks;
     }
 
     public void initBoard(String boardString) {
@@ -39,7 +42,7 @@ public class Board {
         }
     }
 
-    public void clear() {
+    private void clear() {
         ranks.clear();
         whitePieces.clear();
         blackPieces.clear();
@@ -55,6 +58,10 @@ public class Board {
             whitePieces.add(piece);
             whitePieces.remove(removedPiece);
         }
+    }
+
+    public void move(String from, String to) {
+        move(new Position(from), new Position(to));
     }
 
     public void move(Position from, Position to) {
@@ -75,6 +82,10 @@ public class Board {
 
     public Piece findPiece(Position position) {
         return findRank(position).findPiece(position);
+    }
+
+    public Piece findPiece(String position) {
+        return findPiece(new Position(position));
     }
 
     public boolean isBlank(Position nPosition) {
@@ -122,9 +133,16 @@ public class Board {
             if (pawnCount > 1) {
                 score -= 0.5 * pawnCount;
             }
-
         }
         return score;
+    }
+
+    public double calculateWhitePoint() {
+        return calculatePoint(Color.WHITE);
+    }
+
+    public double calculateBlackPoint() {
+        return calculatePoint(Color.BLACK);
     }
 }
 

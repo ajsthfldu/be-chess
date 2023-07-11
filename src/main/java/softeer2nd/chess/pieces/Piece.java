@@ -65,6 +65,14 @@ abstract public class Piece {
         return color == Color.BLACK;
     }
 
+    public char getRepresentation() {
+        if (isWhite()) {
+            return type.getWhiteRepresentation();
+        } else {
+            return type.getBlackRepresentation();
+        }
+    }
+
     abstract public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition);
 
     @Override

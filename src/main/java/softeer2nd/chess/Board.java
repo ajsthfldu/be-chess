@@ -87,29 +87,21 @@ public class Board {
 
     public double calculatePoint(Color color) {
         double score = 0;
-        List<Piece> pieces;
-        if (color == Color.WHITE) {
-            pieces = whitePieces;
-        } else {
-            pieces = blackPieces;
-        }
-        for (Piece piece : pieces) {
-            score += piece.getType().getDefaultPoint();
+        for (Rank rank : ranks) {
+            score += rank.getPoint(color);
         }
         for (int i = 0; i < 8; i++) {
             int pawnCount = 0;
             for (int j = 0; j < 8; j++) {
-                Piece piece = findPiece(new Position(i, j));
-                if (piece.getColor() == color && piece.getType() == Type.PAWN) {
+                if (ranks.get(j).getPieces().get(i).getType() == Type.PAWN) {
                     ++pawnCount;
                 }
             }
-            if (pawnCount > 1) {
-                score -= 0.5 * pawnCount;
-            }
+            score -= pawnCount * 0.5;
         }
         return score;
     }
+
 
     public double calculateWhitePoint() {
         return calculatePoint(Color.WHITE);

@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Piece;
+import softeer2nd.chess.pieces.Piece.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ class Rank {
         return pieces;
     }
 
-    public List<Piece> getPieces(Piece.Color color) {
+    public List<Piece> getPieces(Color color) {
         return pieces.stream()
                 .filter(piece -> piece.getColor() == color)
                 .collect(Collectors.toList());
@@ -83,5 +84,15 @@ class Rank {
 
     public String getRepresentation() {
         return pieces.stream().map(Piece::getRepresentation).map(String::valueOf).collect(Collectors.joining());
+    }
+
+    public double getPoint(Color color) {
+        double point = 0;
+        for (Piece piece : pieces) {
+            if (piece.isSameColor(color)) {
+                point += piece.getType().getDefaultPoint();
+            }
+        }
+        return point;
     }
 }

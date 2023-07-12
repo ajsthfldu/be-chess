@@ -9,8 +9,8 @@ abstract public class Piece {
 
     public enum Color {
         WHITE, BLACK, NOCOLOR;
-    }
 
+    }
     public enum Type {
         PAWN('p', 1.0),
         KNIGHT('n', 2.5),
@@ -21,8 +21,8 @@ abstract public class Piece {
         NO_PIECE('.', 0.0);
 
         private final char representation;
-        private final double defaultPoint;
 
+        private final double defaultPoint;
         Type(char representation, double defaultScore) {
             this.representation = representation;
             this.defaultPoint = defaultScore;
@@ -39,11 +39,11 @@ abstract public class Piece {
         public double getDefaultPoint() {
             return defaultPoint;
         }
+
     }
-
     private final Color color;
-    private final Type type;
 
+    private final Type type;
     Piece(Color color, Type type) {
         this.color = color;
         this.type = type;
@@ -63,6 +63,10 @@ abstract public class Piece {
 
     public boolean isBlack() {
         return color == Color.BLACK;
+    }
+
+    public boolean isSameColor(Color color) {
+        return this.color == color;
     }
 
     public char getRepresentation() {

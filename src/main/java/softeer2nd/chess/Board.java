@@ -5,7 +5,6 @@ import softeer2nd.chess.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.chess.pieces.PieceFactory.createBlank;
@@ -20,17 +19,13 @@ public class Board {
     }
 
     public void initBoard(String boardString) {
-        clear();
+        ranks.clear();
         for (String rankString : boardString.split(NEWLINE)) {
             ranks.add(new Rank(rankString));
         }
     }
 
-    private void clear() {
-        ranks.clear();
-    }
-
-    public void move(Position position, Piece piece) {
+    private void place(Position position, Piece piece) {
         findRank(position).updatePiece(position, piece);
     }
 
@@ -38,14 +33,14 @@ public class Board {
         move(new Position(from), new Position(to));
     }
 
-    public void move(Position from, Position to) {
+    private void move(Position from, Position to) {
         Piece piece = findPiece(from);
         if (findPiece(from).getColor() == findPiece(to).getColor()) {
             return;
         }
         if (piece.verifyMovePosition(this, from, to)) {
-            move(to, piece);
-            move(from, createBlank());
+            place(to, piece);
+            place(from, createBlank());
         }
     }
 
@@ -57,16 +52,12 @@ public class Board {
         return count;
     }
 
-    public Rank findRank(Position position) {
+    private Rank findRank(Position position) {
         return ranks.get(position.getYDegree());
     }
 
-    public Piece findPiece(Position position) {
+    private Piece findPiece(Position position) {
         return findRank(position).findPiece(position);
-    }
-
-    public Piece findPiece(String position) {
-        return findPiece(new Position(position));
     }
 
     public boolean isBlank(Position nPosition) {

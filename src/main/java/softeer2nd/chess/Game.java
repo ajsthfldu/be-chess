@@ -28,10 +28,12 @@ public class Game {
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr");
         board.initBoard(boardString);
+        view.update();
     }
 
     public void move(String sourcePosition, String targetPosition) {
         board.move(sourcePosition, targetPosition);
+        view.update();
     }
 
 

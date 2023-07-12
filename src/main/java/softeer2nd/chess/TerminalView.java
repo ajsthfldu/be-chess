@@ -35,6 +35,13 @@ public class TerminalView {
     }
 
     public String showBoard() {
-        return game.getBoardRepresentation();
+        StringBuilder sb = new StringBuilder();
+        int rankNum = 1;
+        for (String line : game.getBoardRepresentation().split(NEWLINE)) {
+            sb.append(line).append("  ").append(rankNum).append(NEWLINE);
+            rankNum++;
+        }
+        sb.append(NEWLINE).append("abcdefgh");
+        return sb.toString();
     }
 }

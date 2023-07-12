@@ -1,11 +1,9 @@
 package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Piece;
-import softeer2nd.chess.Rank;
 
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static softeer2nd.chess.pieces.Piece.*;
@@ -15,8 +13,6 @@ import static softeer2nd.utils.StringUtils.NEWLINE;
 public class Board {
 
     private final List<Rank> ranks = new ArrayList<>();
-    private final List<Piece> whitePieces = new ArrayList<>();
-    private final List<Piece> blackPieces = new ArrayList<>();
 
     private final List<Observer> observers = new ArrayList<>();
 
@@ -37,29 +33,15 @@ public class Board {
         for (String rankString : boardString.split(NEWLINE)) {
             ranks.add(new Rank(rankString));
         }
-        for (Rank rank : ranks) {
-            whitePieces.addAll(rank.getPieces(Color.WHITE));
-            blackPieces.addAll(rank.getPieces(Color.BLACK));
-        }
         notifyObservers();
     }
 
     private void clear() {
         ranks.clear();
-        whitePieces.clear();
-        blackPieces.clear();
     }
 
     public void move(Position position, Piece piece) {
-        Piece removedPiece = findPiece(position);
         findRank(position).updatePiece(position, piece);
-        if (piece.isBlack()) {
-            blackPieces.add(piece);
-            blackPieces.remove(removedPiece);
-        } else {
-            whitePieces.add(piece);
-            whitePieces.remove(removedPiece);
-        }
     }
 
     public void move(String from, String to) {
@@ -101,25 +83,6 @@ public class Board {
 
     public boolean isBlank(Position nPosition) {
         return findPiece(nPosition).equals(createBlank());
-    }
-
-    public List<Piece> getSortedBlackPieces(boolean reverse) {
-        if (!reverse) {
-            blackPieces.sort(Comparator.comparingDouble(o -> -o.getType().getDefaultPoint()));
-        } else {
-            blackPieces.sort(Comparator.comparingDouble(o -> o.getType().getDefaultPoint()));
-        }
-        return blackPieces;
-    }
-
-
-    public List<Piece> getSortedWhitePieces(boolean reverse) {
-        if (!reverse) {
-            whitePieces.sort(Comparator.comparingDouble(o -> -o.getType().getDefaultPoint()));
-        } else {
-            whitePieces.sort(Comparator.comparingDouble(o -> o.getType().getDefaultPoint()));
-        }
-        return whitePieces;
     }
 
     public double calculatePoint(Color color) {

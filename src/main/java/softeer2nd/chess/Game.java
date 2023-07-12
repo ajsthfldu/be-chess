@@ -1,7 +1,5 @@
 package softeer2nd.chess;
 
-import softeer2nd.chess.pieces.Piece;
-
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class Game {
@@ -15,10 +13,10 @@ public class Game {
         String blankRank = appendNewLine("........");
         String boardString =
                 appendNewLine("RNBQKBNR") +
-                appendNewLine("PPPPPPPP") +
-                blankRank + blankRank + blankRank + blankRank +
-                appendNewLine("pppppppp") +
-                appendNewLine("rnbqkbnr");
+                        appendNewLine("PPPPPPPP") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("pppppppp") +
+                        appendNewLine("rnbqkbnr");
         board.initBoard(boardString);
     }
 

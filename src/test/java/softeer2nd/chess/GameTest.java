@@ -21,17 +21,6 @@ class GameTest {
     @Test
     @DisplayName("기물의 점수를 기준으로 정렬할 수 있어야 한다.")
     void sort() {
-        List<Piece> whitePieces = List.of(createWhiteQueen(), createWhiteRook(), createWhiteRook(), createWhiteBishop(), createWhiteBishop(),
-                createWhiteKnight(), createWhiteKnight(),
-                createWhitePawn(), createWhitePawn(), createWhitePawn(), createWhitePawn(),
-                createWhitePawn(), createWhitePawn(), createWhitePawn(), createWhitePawn(),
-                createWhiteKing());
-        List<Piece> blackPieces = List.of(createBlackQueen(), createBlackRook(), createBlackRook(), createBlackBishop(), createBlackBishop(),
-                createBlackKnight(), createBlackKnight(),
-                createBlackPawn(), createBlackPawn(), createBlackPawn(), createBlackPawn(),
-                createBlackPawn(), createBlackPawn(), createBlackPawn(), createBlackPawn(),
-                createBlackKing());
-        assertEquals(game.getSortedWhitePieces(false), whitePieces);
-        assertEquals(game.getSortedBlackPieces(false), blackPieces);
+        fail();
     }
 }

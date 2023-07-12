@@ -5,6 +5,7 @@ import softeer2nd.chess.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.chess.pieces.PieceFactory.createBlank;
@@ -13,16 +14,6 @@ import static softeer2nd.utils.StringUtils.NEWLINE;
 public class Board {
 
     private final List<Rank> ranks = new ArrayList<>();
-
-    private final List<Observer> observers = new ArrayList<>();
-
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public void notifyObservers() {
-        observers.forEach(Observer::update);
-    }
 
     public List<Rank> getRanks() {
         return ranks;
@@ -33,7 +24,6 @@ public class Board {
         for (String rankString : boardString.split(NEWLINE)) {
             ranks.add(new Rank(rankString));
         }
-        notifyObservers();
     }
 
     private void clear() {
@@ -51,14 +41,12 @@ public class Board {
     public void move(Position from, Position to) {
         Piece piece = findPiece(from);
         if (findPiece(from).getColor() == findPiece(to).getColor()) {
-            notifyObservers();
             return;
         }
         if (piece.verifyMovePosition(this, from, to)) {
             move(to, piece);
             move(from, createBlank());
         }
-        notifyObservers();
     }
 
     public int pieceCount(Piece piece) {
@@ -109,6 +97,14 @@ public class Board {
 
     public double calculateBlackPoint() {
         return calculatePoint(Color.BLACK);
+    }
+
+    public String getRepresentation() {
+        StringBuilder sb = new StringBuilder();
+        for (Rank rank : ranks) {
+            sb.append(rank.getRepresentation()).append(NEWLINE);
+        }
+        return sb.toString();
     }
 }
 

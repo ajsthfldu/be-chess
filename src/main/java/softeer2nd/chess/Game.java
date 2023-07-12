@@ -36,4 +36,7 @@ public class Game {
         return null;
     }
 
+    public String getBoardRepresentation() {
+        return board.getRepresentation();
+    }
 }

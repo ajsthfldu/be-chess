@@ -6,17 +6,14 @@ import java.util.Scanner;
 
 import static softeer2nd.utils.StringUtils.NEWLINE;
 
-public class TerminalView implements Observer {
-    Board board;
+public class TerminalView {
     Game game;
 
     public TerminalView(Board board, Game game) {
-        this.board = board;
         this.game = game;
     }
 
     public void init() {
-        board.addObserver(this);
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();
@@ -32,17 +29,11 @@ public class TerminalView implements Observer {
             }
         }
     }
-
-    @Override
     public void update() {
         System.out.println(showBoard());
     }
 
     public String showBoard() {
-        StringBuilder sb = new StringBuilder();
-        for (Rank rank : board.getRanks()) {
-            sb.append(rank.getRepresentation()).append(NEWLINE);
-        }
-        return sb.toString();
+        return game.getBoardRepresentation();
     }
 }

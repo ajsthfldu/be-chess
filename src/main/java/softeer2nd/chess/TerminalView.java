@@ -9,10 +9,6 @@ import static softeer2nd.utils.StringUtils.NEWLINE;
 public class TerminalView {
     Game game;
 
-    public TerminalView(Board board, Game game) {
-        this.game = game;
-    }
-
     public void init() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -29,6 +25,11 @@ public class TerminalView {
             }
         }
     }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public void update() {
         System.out.println(showBoard());
     }

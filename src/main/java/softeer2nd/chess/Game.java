@@ -7,9 +7,16 @@ import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class Game {
     private final Board board;
+    private final TerminalView view;
 
-    public Game(Board board) {
+    public Game(Board board, TerminalView view) {
         this.board = board;
+        this.view = view;
+    }
+
+    public void start() {
+        view.setGame(this);
+        view.init();
     }
 
     public void initialize() {

@@ -14,7 +14,7 @@ class GameTest {
     Game game;
     @BeforeEach
     void setUp() {
-        game = new Game(new Board());
+        game = new Game(new Board(), new TerminalView());
         game.initialize();
     }
 

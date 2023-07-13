@@ -131,11 +131,14 @@ public class Board {
         for (int i = 0; i < 8; i++) {
             int pawnCount = 0;
             for (int j = 0; j < 8; j++) {
-                if (ranks.get(j).getPieces().get(i).getType() == Type.PAWN) {
+                Piece piece = ranks.get(j).getPieces().get(i);
+                if (piece.isSameColor(color) && piece.isPawn()) {
                     ++pawnCount;
                 }
             }
-            score -= pawnCount * 0.5;
+            if (pawnCount > 1) {
+                score -= pawnCount * 0.5;
+            }
         }
         return score;
     }

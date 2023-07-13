@@ -1,5 +1,8 @@
 package softeer2nd.chess;
 
+import softeer2nd.chess.exceptions.InvalidMoveException;
+import softeer2nd.chess.exceptions.InvalidPositionException;
+
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class Game {
@@ -29,8 +32,12 @@ public class Game {
     }
 
     public void move(String sourcePosition, String targetPosition) {
-        board.move(sourcePosition, targetPosition);
-        view.update();
+        try {
+            board.move(sourcePosition, targetPosition);
+            view.update();
+        } catch (InvalidPositionException e) {
+            view.print(e.getMessage());
+        }
     }
 
 

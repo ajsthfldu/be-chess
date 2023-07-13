@@ -1,18 +1,28 @@
 package softeer2nd.chess;
 
-import java.util.Objects;
+import softeer2nd.chess.exceptions.InvalidPositionException;
+
 
 public class Position {
     private final int xDegree;
     private final int yDegree;
 
-    public Position(String position) {
-        this(position.charAt(0) - 'a', 8 - (position.charAt(1) - '0'));
+    public Position(String position) throws InvalidPositionException {
+        if (position.length() != 2) {
+            throw new InvalidPositionException("유효한 위치 입력이 아닙니다.");
+        }
+        int x = position.charAt(0) - 'a';
+        int y = 8 - (position.charAt(1) - '0');
+        if (x > 7 || x < 0 || y > 7 || y < 0) {
+            throw new InvalidPositionException("유효한 위치가 아닙니다.");
+        }
+        xDegree = x;
+        yDegree = y;
     }
 
-    public Position(int xDegree, int yDegree) {
+    public Position(int xDegree, int yDegree) throws InvalidPositionException {
         if (xDegree > 7 || xDegree < 0 || yDegree > 7 || yDegree < 0) {
-            throw new RuntimeException("보드 밖에 배치 할 수 없습니다.");
+            throw new InvalidPositionException("유효한 위치가 아닙니다.");
         }
         this.xDegree = xDegree;
         this.yDegree = yDegree;
@@ -38,7 +48,7 @@ public class Position {
         }
     }
 
-    public Position moved(Direction direction) {
+    public Position moved(Direction direction) throws InvalidPositionException {
         return new Position(xDegree + direction.getXDegree(), yDegree + direction.getYDegree());
     }
 }

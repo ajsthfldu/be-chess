@@ -22,6 +22,8 @@ public class TerminalView {
             } else if (input.startsWith("move")) {
                 String[] s = input.split(" ");
                 game.move(s[1], s[2]);
+            } else {
+                System.out.println("알 수 없는 명령입니다.");
             }
         }
     }
@@ -43,5 +45,9 @@ public class TerminalView {
         }
         sb.append(NEWLINE).append("abcdefgh");
         return sb.toString();
+    }
+
+    public void print(String message) {
+        System.out.println(message);
     }
 }

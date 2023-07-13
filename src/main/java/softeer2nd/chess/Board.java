@@ -1,5 +1,6 @@
 package softeer2nd.chess;
 
+import softeer2nd.chess.exceptions.InvalidPositionException;
 import softeer2nd.chess.pieces.Piece;
 
 
@@ -29,7 +30,7 @@ public class Board {
         findRank(position).updatePiece(position, piece);
     }
 
-    public void move(String from, String to) {
+    public void move(String from, String to) throws InvalidPositionException {
         move(new Position(from), new Position(to));
     }
 
@@ -98,4 +99,3 @@ public class Board {
         return sb.toString();
     }
 }
-

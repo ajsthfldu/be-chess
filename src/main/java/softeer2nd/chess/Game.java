@@ -35,7 +35,7 @@ public class Game {
         try {
             board.move(sourcePosition, targetPosition);
             view.update();
-        } catch (InvalidPositionException e) {
+        } catch (InvalidPositionException | InvalidMoveException e) {
             view.print(e.getMessage());
         }
     }

@@ -1,5 +1,6 @@
 package softeer2nd.chess;
 
+import softeer2nd.chess.exceptions.InvalidMoveException;
 import softeer2nd.chess.exceptions.InvalidPositionException;
 import softeer2nd.chess.pieces.Piece;
 
@@ -30,11 +31,11 @@ public class Board {
         findRank(position).updatePiece(position, piece);
     }
 
-    public void move(String from, String to) throws InvalidPositionException {
+    public void move(String from, String to) throws InvalidPositionException, InvalidMoveException {
         move(new Position(from), new Position(to));
     }
 
-    private void move(Position from, Position to) {
+    private void move(Position from, Position to) throws InvalidMoveException {
         Piece piece = findPiece(from);
         if (findPiece(from).getColor() == findPiece(to).getColor()) {
             return;
@@ -42,6 +43,8 @@ public class Board {
         if (piece.verifyMovePosition(this, from, to)) {
             place(to, piece);
             place(from, createBlank());
+        } else {
+            throw new InvalidMoveException("해당 위치로 이동할 수 없습니다.");
         }
     }
 

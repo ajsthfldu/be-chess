@@ -3,6 +3,7 @@ package softeer2nd.chess.pieces;
 import softeer2nd.chess.Board;
 import softeer2nd.chess.Direction;
 import softeer2nd.chess.Position;
+import softeer2nd.chess.exceptions.InvalidPositionException;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Queen extends Piece {
                 return false;
             }
             return verifyDirection(board, direction, nPosition, targetPosition);
-        } catch (Exception e) {
+        } catch (InvalidPositionException e) {
             return false;
         }
     }

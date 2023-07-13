@@ -64,7 +64,7 @@ class Rank {
 
     public List<Piece> getPieces(Color color) {
         return pieces.stream()
-                .filter(piece -> piece.getColor() == color)
+                .filter(piece -> piece.isSameColor(color))
                 .collect(Collectors.toList());
     }
 

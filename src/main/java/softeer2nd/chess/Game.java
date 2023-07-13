@@ -40,8 +40,7 @@ public class Game {
             view.print(e.getMessage());
         }
     }
-
-
+    
     public String getSortedWhitePiecesRepresentation(boolean reverse) {
         return null;
     }

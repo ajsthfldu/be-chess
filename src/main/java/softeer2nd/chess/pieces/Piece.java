@@ -1,8 +1,6 @@
 package softeer2nd.chess.pieces;
 
-import softeer2nd.chess.Board;
 import softeer2nd.chess.Direction;
-import softeer2nd.chess.Position;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,10 +9,8 @@ abstract public class Piece {
 
     public enum Color {
         WHITE, BLACK, NOCOLOR;
-
-
-
     }
+
     public enum Type {
         PAWN('p', 1.0),
         KNIGHT('n', 2.5),
@@ -41,13 +37,11 @@ abstract public class Piece {
         public double getDefaultPoint() {
             return defaultPoint;
         }
-
-
-
     }
+
     private final Color color;
     private final Type type;
-    Piece(Color color, Type type) {
+    protected Piece(Color color, Type type) {
         this.color = color;
         this.type = type;
     }
@@ -55,6 +49,7 @@ abstract public class Piece {
     public Color getColor() {
         return color;
     }
+
     public Type getType() {
         return type;
     }
@@ -86,7 +81,6 @@ abstract public class Piece {
     abstract public List<Direction> getDirections();
 
     abstract public boolean isShortMove();
-
 
     @Override
     public boolean equals(Object obj) {

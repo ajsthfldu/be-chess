@@ -2,6 +2,8 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.exceptions.InvalidPositionException;
 
+import java.util.Objects;
+
 
 public class Position {
     private final int xDegree;
@@ -46,6 +48,11 @@ public class Position {
             Position position = (Position) obj;
             return this.xDegree == position.xDegree && this.yDegree == position.yDegree;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xDegree, yDegree);
     }
 
     public Position moved(Direction direction) throws InvalidPositionException {

@@ -59,13 +59,7 @@ public class Board {
     }
 
     private boolean verifyTurn(Piece piece) {
-        if (isWhiteTurn() && piece.isWhite()) {
-            return true;
-        }
-        if (!isWhiteTurn() && piece.isBlack()) {
-            return true;
-        }
-        return false;
+        return isWhiteTurn() == piece.isWhite();
     }
 
     private boolean isWhiteTurn() {

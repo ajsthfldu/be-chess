@@ -1,7 +1,5 @@
 package softeer2nd.chess;
 
-import softeer2nd.chess.pieces.Piece;
-
 import java.util.Scanner;
 
 import static softeer2nd.utils.StringUtils.NEWLINE;

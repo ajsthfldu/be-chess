@@ -15,7 +15,7 @@ import static softeer2nd.utils.StringUtils.NEWLINE;
 
 public class Board {
 
-    private boolean isWhiteTurn = true;
+    private boolean turnFlag = true;
 
     private final List<Rank> ranks = new ArrayList<>();
 
@@ -39,22 +39,37 @@ public class Board {
     }
 
     private void move(Position from, Position to) throws InvalidMoveException, InvalidTurnException {
-        if (verifyTurn(from)) {
+        Piece piece = findPiece(from);
+        if (!verifyTurn(piece)) {
             throw new InvalidTurnException("차례가 되지 않았습니다.");
         }
-        Piece piece = findPiece(from);
         if (from.equals(to)) {
             throw new InvalidMoveException("제 자리이동은 할 수 없습니다.");
         }
-        if (findPiece(from).isSameColor(findPiece(to))) {
+        if (piece.isSameColor(findPiece(to))) {
             throw new InvalidMoveException("같은 편 위치로 이동할 수 없습니다.");
         }
         if (verifyMove(piece, from, to)) {
             place(to, piece);
             place(from, createBlank());
+            turnFlag = !turnFlag;
         } else {
             throw new InvalidMoveException("해당 위치로 이동할 수 없습니다.");
         }
+    }
+
+    private boolean verifyTurn(Piece piece) {
+        if (isWhiteTurn() && piece.isWhite()) {
+            return true;
+        }
+        if (!isWhiteTurn() && piece.isBlack()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isWhiteTurn() {
+        return turnFlag;
     }
 
     private boolean verifyMove(Piece piece, Position from, Position to) {

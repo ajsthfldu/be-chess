@@ -2,6 +2,7 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.exceptions.InvalidMoveException;
 import softeer2nd.chess.exceptions.InvalidPositionException;
+import softeer2nd.chess.exceptions.InvalidTurnException;
 
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
@@ -35,7 +36,7 @@ public class Game {
         try {
             board.move(sourcePosition, targetPosition);
             view.update();
-        } catch (InvalidPositionException | InvalidMoveException e) {
+        } catch (InvalidPositionException | InvalidMoveException | InvalidTurnException e) {
             view.print(e.getMessage());
         }
     }

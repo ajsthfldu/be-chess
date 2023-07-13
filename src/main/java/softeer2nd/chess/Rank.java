@@ -62,24 +62,12 @@ class Rank {
         return pieces;
     }
 
-    public List<Piece> getPieces(Color color) {
-        return pieces.stream()
-                .filter(piece -> piece.isSameColor(color))
-                .collect(Collectors.toList());
-    }
-
     public Piece findPiece(Position position) {
         return pieces.get(position.getXDegree());
     }
 
     public void updatePiece(Position position, Piece piece) {
         pieces.set(position.getXDegree(), piece);
-    }
-
-    public int pieceCount(Piece fpiece) {
-        return (int) pieces.stream()
-                .filter(piece -> piece.equals(fpiece))
-                .count();
     }
 
     public String getRepresentation() {

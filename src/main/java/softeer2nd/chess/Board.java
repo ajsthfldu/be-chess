@@ -111,15 +111,6 @@ public class Board {
         }
     }
 
-
-    public int pieceCount(Piece piece) {
-        int count = 0;
-        for (Rank rank : ranks) {
-            count += rank.pieceCount(piece);
-        }
-        return count;
-    }
-
     private Rank findRank(Position position) {
         return ranks.get(position.getYDegree());
     }

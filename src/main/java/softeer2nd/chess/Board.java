@@ -2,17 +2,20 @@ package softeer2nd.chess;
 
 import softeer2nd.chess.exceptions.InvalidMoveException;
 import softeer2nd.chess.exceptions.InvalidPositionException;
+import softeer2nd.chess.exceptions.InvalidTurnException;
 import softeer2nd.chess.pieces.Piece;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static softeer2nd.chess.pieces.Piece.*;
+import static softeer2nd.chess.pieces.Piece.Color;
+import static softeer2nd.chess.pieces.Piece.Type;
 import static softeer2nd.chess.pieces.PieceFactory.createBlank;
 import static softeer2nd.utils.StringUtils.NEWLINE;
 
 public class Board {
+
+    private boolean isWhiteTurn = true;
 
     private final List<Rank> ranks = new ArrayList<>();
 
@@ -31,22 +34,74 @@ public class Board {
         findRank(position).updatePiece(position, piece);
     }
 
-    public void move(String from, String to) throws InvalidPositionException, InvalidMoveException {
+    public void move(String from, String to) throws InvalidPositionException, InvalidMoveException, InvalidTurnException {
         move(new Position(from), new Position(to));
     }
 
-    private void move(Position from, Position to) throws InvalidMoveException {
+    private void move(Position from, Position to) throws InvalidMoveException, InvalidTurnException {
+        if (verifyTurn(from)) {
+            throw new InvalidTurnException("차례가 되지 않았습니다.");
+        }
         Piece piece = findPiece(from);
-        if (findPiece(from).getColor() == findPiece(to).getColor()) {
+        if (from.equals(to)) {
+            throw new InvalidMoveException("제 자리이동은 할 수 없습니다.");
+        }
+        if (findPiece(from).isSameColor(findPiece(to))) {
             throw new InvalidMoveException("같은 편 위치로 이동할 수 없습니다.");
         }
-        if (piece.verifyMovePosition(this, from, to)) {
+        if (verifyMove(piece, from, to)) {
             place(to, piece);
             place(from, createBlank());
         } else {
             throw new InvalidMoveException("해당 위치로 이동할 수 없습니다.");
         }
     }
+
+    private boolean verifyMove(Piece piece, Position from, Position to) {
+        if (piece.isShortMove()) {
+            return verifyShortMove(piece.getDirections(), from, to);
+        }
+        return verifyStraightMove(piece.getDirections(), from, to);
+    }
+
+    private boolean verifyShortMove(List<Direction> directions, Position from, Position to) {
+        for (Direction direction : directions) {
+            try {
+                Position nPosition = from.moved(direction);
+                if (nPosition.equals(to)) {
+                    return true;
+                }
+            } catch (InvalidPositionException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean verifyStraightMove(List<Direction> directions, Position from, Position to) {
+        for (Direction direction : directions) {
+            if (verifyDirection(direction, from, to)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean verifyDirection(Direction direction, Position from, Position to) {
+        try {
+            Position nPosition = from.moved(direction);
+            if (nPosition.equals(to)) {
+                return true;
+            }
+            if (!isBlank(nPosition)) {
+                return false;
+            }
+            return verifyDirection(direction, nPosition, to);
+        } catch (InvalidPositionException e) {
+            return false;
+        }
+    }
+
 
     public int pieceCount(Piece piece) {
         int count = 0;

@@ -3,6 +3,8 @@ package softeer2nd.chess;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import softeer2nd.chess.exceptions.InvalidMoveException;
+import softeer2nd.chess.exceptions.InvalidPositionException;
 
 import java.util.List;
 
@@ -29,31 +31,31 @@ class BoardTest {
     void initialize() {
         board.initBoard(boardString);
         List<Rank> ranks = board.getRanks();
-        assertEquals(ranks.get(0).getRepresentation(), "RNBQKBNR");
-        assertEquals(ranks.get(1).getRepresentation(), "PPPPPPPP");
-        assertEquals(ranks.get(2).getRepresentation(), "........");
-        assertEquals(ranks.get(3).getRepresentation(), "........");
-        assertEquals(ranks.get(4).getRepresentation(), "........");
-        assertEquals(ranks.get(5).getRepresentation(), "........");
-        assertEquals(ranks.get(6).getRepresentation(), "pppppppp");
-        assertEquals(ranks.get(7).getRepresentation(), "rnbqkbnr");
+        assertEquals(boardString, board.getRepresentation());
     }
 
     @Test
     @DisplayName("기물을 움직일 수 있어야 한다.")
-    void movePieces() {
+    void movePieces() throws InvalidPositionException, InvalidMoveException {
         board.initBoard(boardString);
         List<Rank> ranks = board.getRanks();
         board.move("a2", "a3");
-        assertEquals(board.findPiece("a2"), createBlank());
-        assertEquals(board.findPiece("a3"), createWhitePawn());
+        String boardRepresentation = appendNewLine("RNBQKBNR") +
+                appendNewLine("PPPPPPPP") +
+                appendNewLine("........") +
+                appendNewLine("........") +
+                appendNewLine("........") +
+                appendNewLine("p.......") +
+                appendNewLine(".ppppppp") +
+                appendNewLine("rnbqkbnr");
+        assertEquals(board.getRepresentation(), boardRepresentation);
     }
 
     @Test
     @DisplayName("색상별 점수를 계산할 수 있어야 한다.")
     void calculatePoint() {
         board.initBoard(boardString);
-        assertEquals(board.calculateWhitePoint(), 38.0);
-        assertEquals(board.calculateBlackPoint(), 38.0);
+        assertEquals(38.0, board.calculateWhitePoint());
+        assertEquals(38.0, board.calculateBlackPoint());
     }
 }

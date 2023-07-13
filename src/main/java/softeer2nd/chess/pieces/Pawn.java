@@ -1,8 +1,6 @@
 package softeer2nd.chess.pieces;
 
-import softeer2nd.chess.Board;
 import softeer2nd.chess.Direction;
-import softeer2nd.chess.Position;
 
 import java.util.List;
 
@@ -12,22 +10,15 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition) {
-        List<Direction> directions;
+    public List<Direction> getDirections() {
         if (isWhite()) {
-            directions = Direction.whitePawnDirection();
-        } else {
-            directions = Direction.blackPawnDirection();
+            return Direction.whitePawnDirection();
         }
-        for (Direction direction : directions) {
-            try {
-                Position nPosition = sourcePosition.moved(direction);
-                if (nPosition.equals(targetPosition)) {
-                    return true;
-                }
-            } catch (Exception ignored) {
-            }
-        }
-        return false;
+        return Direction.blackPawnDirection();
+    }
+
+    @Override
+    public boolean isShortMove() {
+        return true;
     }
 }

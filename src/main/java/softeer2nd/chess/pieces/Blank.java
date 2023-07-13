@@ -1,7 +1,9 @@
 package softeer2nd.chess.pieces;
 
-import softeer2nd.chess.Board;
-import softeer2nd.chess.Position;
+import softeer2nd.chess.Direction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Blank extends Piece {
     public Blank() {
@@ -9,7 +11,12 @@ public class Blank extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition) {
-        return false;
+    public List<Direction> getDirections() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public boolean isShortMove() {
+        return true;
     }
 }

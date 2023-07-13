@@ -1,14 +1,18 @@
 package softeer2nd.chess.pieces;
 
 import softeer2nd.chess.Board;
+import softeer2nd.chess.Direction;
 import softeer2nd.chess.Position;
 
+import java.util.List;
 import java.util.Objects;
 
 abstract public class Piece {
 
     public enum Color {
         WHITE, BLACK, NOCOLOR;
+
+
 
     }
     public enum Type {
@@ -19,10 +23,9 @@ abstract public class Piece {
         QUEEN('q', 9.0),
         KING('k', 0.0),
         NO_PIECE('.', 0.0);
-
         private final char representation;
-
         private final double defaultPoint;
+
         Type(char representation, double defaultScore) {
             this.representation = representation;
             this.defaultPoint = defaultScore;
@@ -31,7 +34,6 @@ abstract public class Piece {
         public char getWhiteRepresentation() {
             return representation;
         }
-
         public char getBlackRepresentation() {
             return Character.toUpperCase(representation);
         }
@@ -40,9 +42,10 @@ abstract public class Piece {
             return defaultPoint;
         }
 
+
+
     }
     private final Color color;
-
     private final Type type;
     Piece(Color color, Type type) {
         this.color = color;
@@ -52,7 +55,6 @@ abstract public class Piece {
     public Color getColor() {
         return color;
     }
-
     public Type getType() {
         return type;
     }
@@ -69,6 +71,10 @@ abstract public class Piece {
         return this.color == color;
     }
 
+    public boolean isSameColor(Piece piece) {
+        return isSameColor(piece.color);
+    }
+
     public char getRepresentation() {
         if (isWhite()) {
             return type.getWhiteRepresentation();
@@ -77,7 +83,10 @@ abstract public class Piece {
         }
     }
 
-    abstract public boolean verifyMovePosition(Board board, Position sourcePosition, Position targetPosition);
+    abstract public List<Direction> getDirections();
+
+    abstract public boolean isShortMove();
+
 
     @Override
     public boolean equals(Object obj) {

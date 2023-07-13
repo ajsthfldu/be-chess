@@ -17,10 +17,4 @@ class GameTest {
         game = new Game(new Board(), new TerminalView());
         game.initialize();
     }
-
-    @Test
-    @DisplayName("기물의 점수를 기준으로 정렬할 수 있어야 한다.")
-    void sort() {
-        fail();
-    }
 }

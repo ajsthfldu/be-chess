@@ -155,4 +155,8 @@ public class Board {
         }
         return sb.toString();
     }
+
+    public List<Rank> getRanks() {
+        return ranks;
+    }
 }

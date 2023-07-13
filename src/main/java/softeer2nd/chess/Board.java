@@ -38,7 +38,7 @@ public class Board {
     private void move(Position from, Position to) throws InvalidMoveException {
         Piece piece = findPiece(from);
         if (findPiece(from).getColor() == findPiece(to).getColor()) {
-            return;
+            throw new InvalidMoveException("같은 편 위치로 이동할 수 없습니다.");
         }
         if (piece.verifyMovePosition(this, from, to)) {
             place(to, piece);

@@ -31,16 +31,14 @@ class BoardTest {
     @Test
     void initialize() {
         board.initBoard(boardString);
-        List<Rank> ranks = board.getRanks();
         assertEquals(boardString, board.getRepresentation());
     }
 
     @Test
     @DisplayName("기물을 움직일 수 있어야 한다.")
-    void movePieces() throws InvalidPositionException, InvalidMoveException, InvalidTurnException {
+    void movePieces() {
         board.initBoard(boardString);
-        List<Rank> ranks = board.getRanks();
-        board.move("a2", "a3");
+        assertDoesNotThrow(() -> board.move("a2", "a3"));
         String boardRepresentation = appendNewLine("RNBQKBNR") +
                 appendNewLine("PPPPPPPP") +
                 appendNewLine("........") +

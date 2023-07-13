@@ -42,7 +42,7 @@ abstract public class Piece {
     private final Color color;
 
     private final Type type;
-    protected Piece(Color color, Type type) {
+    Piece(Color color, Type type) {
         this.color = color;
         this.type = type;
     }

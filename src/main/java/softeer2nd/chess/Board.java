@@ -19,10 +19,6 @@ public class Board {
 
     private final List<Rank> ranks = new ArrayList<>();
 
-    public List<Rank> getRanks() {
-        return ranks;
-    }
-
     public void initBoard(String boardString) {
         ranks.clear();
         for (String rankString : boardString.split(NEWLINE)) {
@@ -119,11 +115,11 @@ public class Board {
         return findRank(position).findPiece(position);
     }
 
-    public boolean isBlank(Position nPosition) {
+    private boolean isBlank(Position nPosition) {
         return findPiece(nPosition).equals(createBlank());
     }
 
-    public double calculatePoint(Color color) {
+    private double calculatePoint(Color color) {
         double score = 0;
         for (Rank rank : ranks) {
             score += rank.getPoint(color);

@@ -38,10 +38,10 @@ public class TerminalView {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        int rankNum = 1;
+        int rankNum = 8;
         for (String line : game.getBoardRepresentation().split(NEWLINE)) {
             sb.append(line).append("  ").append(rankNum).append(NEWLINE);
-            rankNum++;
+            rankNum--;
         }
         sb.append(NEWLINE).append("abcdefgh");
         return sb.toString();

@@ -9,17 +9,11 @@ public class Position {
     private final int xDegree;
     private final int yDegree;
 
-    public Position(String position) throws InvalidPositionException {
+    public static Position of(String position) throws InvalidPositionException {
         if (position.length() != 2) {
             throw new InvalidPositionException("유효한 위치 입력이 아닙니다.");
         }
-        int x = position.charAt(0) - 'a';
-        int y = 8 - (position.charAt(1) - '0');
-        if (x > 7 || x < 0 || y > 7 || y < 0) {
-            throw new InvalidPositionException("유효한 위치가 아닙니다.");
-        }
-        xDegree = x;
-        yDegree = y;
+        return new Position(position.charAt(0) - 'a', 8 - (position.charAt(1) - '0'));
     }
 
     public Position(int xDegree, int yDegree) throws InvalidPositionException {

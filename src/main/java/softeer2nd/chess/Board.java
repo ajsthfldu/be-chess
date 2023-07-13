@@ -35,7 +35,7 @@ public class Board {
     }
 
     public void move(String from, String to) throws InvalidPositionException, InvalidMoveException, InvalidTurnException {
-        move(new Position(from), new Position(to));
+        move(Position.of(from), Position.of(to));
     }
 
     private void move(Position from, Position to) throws InvalidMoveException, InvalidTurnException {

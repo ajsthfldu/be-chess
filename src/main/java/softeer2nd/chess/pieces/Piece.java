@@ -58,10 +58,6 @@ abstract public class Piece {
         return color == Color.WHITE;
     }
 
-    public boolean isBlack() {
-        return color == Color.BLACK;
-    }
-
     public boolean isSameColor(Color color) {
         return this.color == color;
     }

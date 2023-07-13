@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import softeer2nd.chess.exceptions.InvalidMoveException;
 import softeer2nd.chess.exceptions.InvalidPositionException;
+import softeer2nd.chess.exceptions.InvalidTurnException;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ class BoardTest {
 
     @Test
     @DisplayName("기물을 움직일 수 있어야 한다.")
-    void movePieces() throws InvalidPositionException, InvalidMoveException {
+    void movePieces() throws InvalidPositionException, InvalidMoveException, InvalidTurnException {
         board.initBoard(boardString);
         List<Rank> ranks = board.getRanks();
         board.move("a2", "a3");

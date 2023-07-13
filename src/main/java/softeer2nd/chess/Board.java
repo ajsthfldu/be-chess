@@ -76,8 +76,7 @@ public class Board {
                 if (nPosition.equals(to)) {
                     return true;
                 }
-            } catch (InvalidPositionException e) {
-                return false;
+            } catch (InvalidPositionException ignored) {
             }
         }
         return false;
